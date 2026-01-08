@@ -1,6 +1,0 @@
-packages:
-  - client
-
-onlyBuiltDependencies:
-  - esbuild
-  - unrs-resolver
