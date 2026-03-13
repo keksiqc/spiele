@@ -6,7 +6,6 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vitest/config'
-import VueMacros from 'vue-macros/vite'
 import { VueRouterAutoImports } from 'vue-router/unplugin'
 import VueRouter from 'vue-router/vite'
 
@@ -17,22 +16,16 @@ export default defineConfig({
     },
   },
   plugins: [
+    Vue({
+      script: {
+        propsDestructure: true,
+        defineModel: true,
+      },
+    }),
+
     // https://github.com/vuejs/router/pull/2603
     VueRouter({
       dts: 'src/typed-router.d.ts',
-    }),
-
-    VueMacros({
-      defineOptions: false,
-      defineModels: false,
-      plugins: {
-        vue: Vue({
-          script: {
-            propsDestructure: true,
-            defineModel: true,
-          },
-        }),
-      },
     }),
 
     // https://github.com/antfu/unplugin-auto-import
