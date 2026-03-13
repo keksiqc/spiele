@@ -5,10 +5,10 @@ import Vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { VueRouterAutoImports } from 'unplugin-vue-router'
-import VueRouter from 'unplugin-vue-router/vite'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import VueMacros from 'vue-macros/vite'
+import { VueRouterAutoImports } from 'vue-router/unplugin'
+import VueRouter from 'vue-router/vite'
 
 export default defineConfig({
   resolve: {
@@ -17,6 +17,11 @@ export default defineConfig({
     },
   },
   plugins: [
+    // https://github.com/vuejs/router/pull/2603
+    VueRouter({
+      dts: 'src/typed-router.d.ts',
+    }),
+
     VueMacros({
       defineOptions: false,
       defineModels: false,
@@ -30,9 +35,6 @@ export default defineConfig({
       },
     }),
 
-    // https://github.com/posva/unplugin-vue-router
-    VueRouter(),
-
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
       imports: [
@@ -45,9 +47,7 @@ export default defineConfig({
         },
       ],
       dts: true,
-      dirs: [
-        './src/composables',
-      ],
+      dirs: ['./src/composables'],
       vueTemplate: true,
     }),
 
@@ -60,4 +60,9 @@ export default defineConfig({
     // see uno.config.ts for config
     UnoCSS(),
   ],
+
+  // https://github.com/vitest-dev/vitest
+  test: {
+    environment: 'jsdom',
+  },
 })
