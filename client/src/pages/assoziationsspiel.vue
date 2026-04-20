@@ -193,13 +193,13 @@ function copyRoomID() {
     <div class="max-w-2xl w-full p-6 space-y-6">
       <h1 class="text-center space-y-1">
         <div class="text-2xl font-light">
-          Das große
+          El gran juego de
         </div>
         <div class="from-blue-300 via-purple-300 to-pink-300 bg-gradient-to-r bg-clip-text text-5xl text-transparent font-bold">
-          ASSOZIATIONS
+          ASOCIACION
         </div>
         <div class="text-3xl font-light">
-          Spiel
+          De la caseta
         </div>
       </h1>
 
@@ -215,7 +215,7 @@ function copyRoomID() {
           :disabled="revealed"
           type="text"
           class="input"
-          placeholder="Eingabe"
+          placeholder="Respuesta"
         >
         <input
           v-if="revealed"
@@ -230,28 +230,28 @@ function copyRoomID() {
             :disabled="btnRevealed"
             @click="handleReveal"
           >
-            REVEAL
+            MOSTRAR
           </button>
           <button
             class="btn"
             :disabled="!revealed"
             @click="handleSubmit"
           >
-            RICHTIG
+            CORRECTO
           </button>
           <button
             class="btn"
             :disabled="!revealed"
             @click="resetStreak"
           >
-            FALSCH
+            INCORRECTO
           </button>
           <button
             class="btn"
             :disabled="!revealed"
             @click="nextCategory"
           >
-            WEITER
+            SEGUIR
           </button>
         </div>
       </div>
@@ -269,13 +269,13 @@ function copyRoomID() {
             :disabled="!roomID"
             @click="joinRoom"
           >
-            Beitreten
+            UNIRSE
           </button>
           <button
             class="btn"
             @click="createRoom"
           >
-            Erstellen
+            CREAR
           </button>
         </div>
       </div>
