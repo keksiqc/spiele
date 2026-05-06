@@ -1,9 +1,16 @@
 {
   "name": "assoziationsspiel",
   "version": "1.0.0",
+  "private": true,
   "description": "",
-  "main": "index.js",
-  "scripts": {},
   "author": "keksiqc",
-  "packageManager": "pnpm@10.27.0"
+  "packageManager": "pnpm@11.0.6",
+  "scripts": {
+    "dev": "pnpm --filter @assoziationsspiel/client dev",
+    "build": "pnpm --filter @assoziationsspiel/client build",
+    "preview": "pnpm --filter @assoziationsspiel/client preview",
+    "lint": "pnpm --filter @assoziationsspiel/client lint",
+    "lint:fix": "pnpm --filter @assoziationsspiel/client lint:fix",
+    "test": "pnpm --filter @assoziationsspiel/client test"
+  }
 }
