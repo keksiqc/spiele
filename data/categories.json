@@ -1,154 +1,604 @@
 {
   "categories": [
-    "Tiere",
-    "Städte",
-    "Länder",
-    "Berufe",
-    "Sportarten",
-    "Farben",
-    "Essen",
-    "Getränke",
-    "Musikinstrumente",
-    "Fahrzeuge",
-    "Pflanzen",
-    "Filme",
-    "Bücher",
-    "Berühmte Personen",
-    "Technologie",
-    "Kleidung",
-    "Möbel",
-    "Werkzeuge",
-    "Hobbys",
-    "Wetterphänomene",
-    "Körperteile",
-    "Sprachen",
-    "Flüsse",
-    "Berge",
-    "Schulfächer",
-    "Serie",
-    "Form",
-    "Genre",
-    "Sehenswürdigkeit",
-    "Spiel",
-    "Superheld",
-    "Superschurke",
-    "Biom",
-    "Marke",
-    "Gewürz",
-    "Süßigkeit",
-    "Jahreszeit",
-    "Küche",
-    "Kontinent",
-    "Emotion",
-    "Erfindungen",
-    "Musikgenres",
-    "Tanzstile",
-    "Krankheiten",
-    "Wissenschaftlich",
-    "Mythologische Wesen",
-    "Historische Ereignisse",
-    "Architekturstile",
-    "Computerspiele",
-    "Brettspiele",
-    "Sportgeräte",
-    "Küchengeräte",
-    "Naturphänomene",
-    "Chemische Elemente",
-    "Planeten",
-    "Feiertage",
-    "Beruhmte Gebäude",
-    "Musikbands",
-    "Politische Systeme",
-    "Währungen",
-    "Wasser",
-    "Comics",
-    "Dinosaurier",
-    "Universitäten",
-    "Handwerksberufe",
-    "Versicherungen",
-    "Baumaterialien",
-    "Kosmetikprodukte",
-    "Haustiere",
-    "Kunstrichtungen",
-    "Museen",
-    "Rituale",
-    "Traditionen",
-    "Redewendungen",
-    "Zitate",
-    "Gedichte",
-    "Theaterstücke",
-    "Opern",
-    "Märchen",
-    "Sagen",
-    "Legenden",
-    "Verschwörungstheorien",
-    "Religionen",
-    "Götter",
-    "Tempel",
-    "Klöster",
-    "Kirchen",
-    "Moscheen",
-    "Feste",
-    "Bräuche",
-    "Parteien",
-    "Orden",
-    "Auszeichnungen",
-    "Preise",
-    "Trophäen",
-    "Medaillen",
-    "Wappen",
-    "Flaggen",
-    "Hymnen",
-    "Uniformen",
-    "Rüstungen",
-    "Waffen",
-    "Kampfkünste",
-    "Heilpflanzen",
-    "Heilmethoden",
-    "Medizin",
-    "Laborgeräte",
-    "Messgeräte",
-    "Energiequellen",
-    "Transportmittel",
-    "Streaming Dienste",
-    "Dialekte",
-    "Schriftsysteme",
-    "Kommunikationsmittel",
-    "Navigationsinstrumente",
-    "Anlageformen",
-    "Kryptowährungen",
-    "Programmiersprachen",
-    "Algorithmen",
-    "Datenstrukturen",
-    "Protokolle",
-    "Speichermedien",
-    "Betriebssysteme",
-    "Satelliten",
-    "Raumstationen",
-    "Teleskope",
-    "Mikroskope",
-    "Vitamine",
-    "Edelsteine",
-    "Metalle",
-    "Größeneinheiten",
-    "Kulturen",
-    "Völker",
-    "Stämme",
-    "Clans",
-    "Ausbildungen",
-    "Studiengänge",
-    "Theorien",
-    "Gesetze",
-    "Modetrends",
-    "Materialien",
-    "Rohstoffe",
-    "Luxusartikel",
-    "Sammlerstücke",
-    "Gesteinsarten",
-    "Vulkane",
-    "Gletscher",
-    "Wüsten",
-    "Oasen",
-    "Inseln"
+    {
+      "de": "Tiere",
+      "en": "Animals"
+    },
+    {
+      "de": "Städte",
+      "en": "Cities"
+    },
+    {
+      "de": "Länder",
+      "en": "Countries"
+    },
+    {
+      "de": "Berufe",
+      "en": "Professions"
+    },
+    {
+      "de": "Sportarten",
+      "en": "Sports"
+    },
+    {
+      "de": "Farben",
+      "en": "Colors"
+    },
+    {
+      "de": "Essen",
+      "en": "Food"
+    },
+    {
+      "de": "Getränke",
+      "en": "Drinks"
+    },
+    {
+      "de": "Musikinstrumente",
+      "en": "Musical instruments"
+    },
+    {
+      "de": "Fahrzeuge",
+      "en": "Vehicles"
+    },
+    {
+      "de": "Pflanzen",
+      "en": "Plants"
+    },
+    {
+      "de": "Filme",
+      "en": "Movies"
+    },
+    {
+      "de": "Bücher",
+      "en": "Books"
+    },
+    {
+      "de": "Berühmte Personen",
+      "en": "Famous people"
+    },
+    {
+      "de": "Technologie",
+      "en": "Technology"
+    },
+    {
+      "de": "Kleidung",
+      "en": "Clothing"
+    },
+    {
+      "de": "Möbel",
+      "en": "Furniture"
+    },
+    {
+      "de": "Werkzeuge",
+      "en": "Tools"
+    },
+    {
+      "de": "Hobbys",
+      "en": "Hobbies"
+    },
+    {
+      "de": "Wetterphänomene",
+      "en": "Weather phenomena"
+    },
+    {
+      "de": "Körperteile",
+      "en": "Body parts"
+    },
+    {
+      "de": "Sprachen",
+      "en": "Languages"
+    },
+    {
+      "de": "Flüsse",
+      "en": "Rivers"
+    },
+    {
+      "de": "Berge",
+      "en": "Mountains"
+    },
+    {
+      "de": "Schulfächer",
+      "en": "School subjects"
+    },
+    {
+      "de": "Serie",
+      "en": "TV series"
+    },
+    {
+      "de": "Form",
+      "en": "Shapes"
+    },
+    {
+      "de": "Genre",
+      "en": "Genres"
+    },
+    {
+      "de": "Sehenswürdigkeit",
+      "en": "Landmarks"
+    },
+    {
+      "de": "Spiel",
+      "en": "Games"
+    },
+    {
+      "de": "Superheld",
+      "en": "Superheroes"
+    },
+    {
+      "de": "Superschurke",
+      "en": "Supervillains"
+    },
+    {
+      "de": "Biom",
+      "en": "Biomes"
+    },
+    {
+      "de": "Marke",
+      "en": "Brands"
+    },
+    {
+      "de": "Gewürz",
+      "en": "Spices"
+    },
+    {
+      "de": "Süßigkeit",
+      "en": "Sweets"
+    },
+    {
+      "de": "Jahreszeit",
+      "en": "Seasons"
+    },
+    {
+      "de": "Küche",
+      "en": "Cuisines"
+    },
+    {
+      "de": "Kontinent",
+      "en": "Continents"
+    },
+    {
+      "de": "Emotion",
+      "en": "Emotions"
+    },
+    {
+      "de": "Erfindungen",
+      "en": "Inventions"
+    },
+    {
+      "de": "Musikgenres",
+      "en": "Music genres"
+    },
+    {
+      "de": "Tanzstile",
+      "en": "Dance styles"
+    },
+    {
+      "de": "Krankheiten",
+      "en": "Diseases"
+    },
+    {
+      "de": "Wissenschaftlich",
+      "en": "Scientific"
+    },
+    {
+      "de": "Mythologische Wesen",
+      "en": "Mythical creatures"
+    },
+    {
+      "de": "Historische Ereignisse",
+      "en": "Historical events"
+    },
+    {
+      "de": "Architekturstile",
+      "en": "Architectural styles"
+    },
+    {
+      "de": "Computerspiele",
+      "en": "Video games"
+    },
+    {
+      "de": "Brettspiele",
+      "en": "Board games"
+    },
+    {
+      "de": "Sportgeräte",
+      "en": "Sports equipment"
+    },
+    {
+      "de": "Küchengeräte",
+      "en": "Kitchen appliances"
+    },
+    {
+      "de": "Naturphänomene",
+      "en": "Natural phenomena"
+    },
+    {
+      "de": "Chemische Elemente",
+      "en": "Chemical elements"
+    },
+    {
+      "de": "Planeten",
+      "en": "Planets"
+    },
+    {
+      "de": "Feiertage",
+      "en": "Holidays"
+    },
+    {
+      "de": "Berühmte Gebäude",
+      "en": "Famous buildings"
+    },
+    {
+      "de": "Musikbands",
+      "en": "Bands"
+    },
+    {
+      "de": "Politische Systeme",
+      "en": "Political systems"
+    },
+    {
+      "de": "Währungen",
+      "en": "Currencies"
+    },
+    {
+      "de": "Wasser",
+      "en": "Water"
+    },
+    {
+      "de": "Comics",
+      "en": "Comics"
+    },
+    {
+      "de": "Dinosaurier",
+      "en": "Dinosaurs"
+    },
+    {
+      "de": "Universitäten",
+      "en": "Universities"
+    },
+    {
+      "de": "Handwerksberufe",
+      "en": "Trades"
+    },
+    {
+      "de": "Versicherungen",
+      "en": "Insurance"
+    },
+    {
+      "de": "Baumaterialien",
+      "en": "Building materials"
+    },
+    {
+      "de": "Kosmetikprodukte",
+      "en": "Cosmetics"
+    },
+    {
+      "de": "Haustiere",
+      "en": "Pets"
+    },
+    {
+      "de": "Kunstrichtungen",
+      "en": "Art movements"
+    },
+    {
+      "de": "Museen",
+      "en": "Museums"
+    },
+    {
+      "de": "Rituale",
+      "en": "Rituals"
+    },
+    {
+      "de": "Traditionen",
+      "en": "Traditions"
+    },
+    {
+      "de": "Redewendungen",
+      "en": "Idioms"
+    },
+    {
+      "de": "Zitate",
+      "en": "Quotes"
+    },
+    {
+      "de": "Gedichte",
+      "en": "Poems"
+    },
+    {
+      "de": "Theaterstücke",
+      "en": "Plays"
+    },
+    {
+      "de": "Opern",
+      "en": "Operas"
+    },
+    {
+      "de": "Märchen",
+      "en": "Fairy tales"
+    },
+    {
+      "de": "Sagen",
+      "en": "Sagas"
+    },
+    {
+      "de": "Legenden",
+      "en": "Legends"
+    },
+    {
+      "de": "Verschwörungstheorien",
+      "en": "Conspiracy theories"
+    },
+    {
+      "de": "Religionen",
+      "en": "Religions"
+    },
+    {
+      "de": "Götter",
+      "en": "Gods"
+    },
+    {
+      "de": "Tempel",
+      "en": "Temples"
+    },
+    {
+      "de": "Klöster",
+      "en": "Monasteries"
+    },
+    {
+      "de": "Kirchen",
+      "en": "Churches"
+    },
+    {
+      "de": "Moscheen",
+      "en": "Mosques"
+    },
+    {
+      "de": "Feste",
+      "en": "Festivals"
+    },
+    {
+      "de": "Bräuche",
+      "en": "Customs"
+    },
+    {
+      "de": "Parteien",
+      "en": "Political parties"
+    },
+    {
+      "de": "Orden",
+      "en": "Orders"
+    },
+    {
+      "de": "Auszeichnungen",
+      "en": "Awards"
+    },
+    {
+      "de": "Preise",
+      "en": "Prizes"
+    },
+    {
+      "de": "Trophäen",
+      "en": "Trophies"
+    },
+    {
+      "de": "Medaillen",
+      "en": "Medals"
+    },
+    {
+      "de": "Wappen",
+      "en": "Coats of arms"
+    },
+    {
+      "de": "Flaggen",
+      "en": "Flags"
+    },
+    {
+      "de": "Hymnen",
+      "en": "Anthems"
+    },
+    {
+      "de": "Uniformen",
+      "en": "Uniforms"
+    },
+    {
+      "de": "Rüstungen",
+      "en": "Armor"
+    },
+    {
+      "de": "Waffen",
+      "en": "Weapons"
+    },
+    {
+      "de": "Kampfkünste",
+      "en": "Martial arts"
+    },
+    {
+      "de": "Heilpflanzen",
+      "en": "Medicinal plants"
+    },
+    {
+      "de": "Heilmethoden",
+      "en": "Healing methods"
+    },
+    {
+      "de": "Medizin",
+      "en": "Medicine"
+    },
+    {
+      "de": "Laborgeräte",
+      "en": "Lab equipment"
+    },
+    {
+      "de": "Messgeräte",
+      "en": "Measuring instruments"
+    },
+    {
+      "de": "Energiequellen",
+      "en": "Energy sources"
+    },
+    {
+      "de": "Transportmittel",
+      "en": "Means of transport"
+    },
+    {
+      "de": "Streaming Dienste",
+      "en": "Streaming services"
+    },
+    {
+      "de": "Dialekte",
+      "en": "Dialects"
+    },
+    {
+      "de": "Schriftsysteme",
+      "en": "Writing systems"
+    },
+    {
+      "de": "Kommunikationsmittel",
+      "en": "Means of communication"
+    },
+    {
+      "de": "Navigationsinstrumente",
+      "en": "Navigation instruments"
+    },
+    {
+      "de": "Anlageformen",
+      "en": "Types of investment"
+    },
+    {
+      "de": "Kryptowährungen",
+      "en": "Cryptocurrencies"
+    },
+    {
+      "de": "Programmiersprachen",
+      "en": "Programming languages"
+    },
+    {
+      "de": "Algorithmen",
+      "en": "Algorithms"
+    },
+    {
+      "de": "Datenstrukturen",
+      "en": "Data structures"
+    },
+    {
+      "de": "Protokolle",
+      "en": "Protocols"
+    },
+    {
+      "de": "Speichermedien",
+      "en": "Storage media"
+    },
+    {
+      "de": "Betriebssysteme",
+      "en": "Operating systems"
+    },
+    {
+      "de": "Satelliten",
+      "en": "Satellites"
+    },
+    {
+      "de": "Raumstationen",
+      "en": "Space stations"
+    },
+    {
+      "de": "Teleskope",
+      "en": "Telescopes"
+    },
+    {
+      "de": "Mikroskope",
+      "en": "Microscopes"
+    },
+    {
+      "de": "Vitamine",
+      "en": "Vitamins"
+    },
+    {
+      "de": "Edelsteine",
+      "en": "Gemstones"
+    },
+    {
+      "de": "Metalle",
+      "en": "Metals"
+    },
+    {
+      "de": "Größeneinheiten",
+      "en": "Units of measurement"
+    },
+    {
+      "de": "Kulturen",
+      "en": "Cultures"
+    },
+    {
+      "de": "Völker",
+      "en": "Peoples"
+    },
+    {
+      "de": "Stämme",
+      "en": "Tribes"
+    },
+    {
+      "de": "Clans",
+      "en": "Clans"
+    },
+    {
+      "de": "Ausbildungen",
+      "en": "Apprenticeships"
+    },
+    {
+      "de": "Studiengänge",
+      "en": "Degree programs"
+    },
+    {
+      "de": "Theorien",
+      "en": "Theories"
+    },
+    {
+      "de": "Gesetze",
+      "en": "Laws"
+    },
+    {
+      "de": "Modetrends",
+      "en": "Fashion trends"
+    },
+    {
+      "de": "Materialien",
+      "en": "Materials"
+    },
+    {
+      "de": "Rohstoffe",
+      "en": "Raw materials"
+    },
+    {
+      "de": "Luxusartikel",
+      "en": "Luxury goods"
+    },
+    {
+      "de": "Sammlerstücke",
+      "en": "Collectibles"
+    },
+    {
+      "de": "Gesteinsarten",
+      "en": "Rock types"
+    },
+    {
+      "de": "Vulkane",
+      "en": "Volcanoes"
+    },
+    {
+      "de": "Gletscher",
+      "en": "Glaciers"
+    },
+    {
+      "de": "Wüsten",
+      "en": "Deserts"
+    },
+    {
+      "de": "Oasen",
+      "en": "Oases"
+    },
+    {
+      "de": "Inseln",
+      "en": "Islands"
+    }
   ]
 }

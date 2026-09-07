@@ -1,19 +1,21 @@
 <script setup lang="ts">
-const games = [
+const { t } = useI18n()
+
+const games = computed(() => [
   {
-    title: 'Assoziationsspiel',
-    description: 'Eine Kategorie, zwei Antworten. Schreibt geheim, deckt gleichzeitig auf und baut eine Serie auf.',
-    playerCount: '2 Spieler',
+    title: t('game.name'),
+    description: t('game.summary'),
+    playerCount: t('home.players', { count: 2 }),
     route: '/assoziationsspiel',
   },
-]
+])
 
 useHead({
-  title: 'spiele.keksi.dev – kleine Spiele für zwei',
+  title: () => t('home.title'),
   meta: [
     {
       name: 'description',
-      content: 'Spiele gemeinsam im Browser – aktuell mit dem Assoziationsspiel für zwei Personen.',
+      content: () => t('home.description'),
     },
   ],
 })
@@ -35,16 +37,14 @@ useHead({
           sm:text-5xl
         "
       >
-        Kleine Spiele für zwei, direkt im Browser.
+        {{ t('home.headline') }}
       </h1>
-      <p
-        class="mt-5 max-w-lg text-lg/8 text-muted"
-      >
-        Raum öffnen, Code teilen, losspielen. Ohne Download und ohne Anmeldung.
+      <p class="mt-5 max-w-lg text-lg/8 text-muted">
+        {{ t('home.intro') }}
       </p>
 
       <ul class="mt-14 divide-y divide-line border-y border-line">
-        <li v-for="game in games" :key="game.title">
+        <li v-for="game in games" :key="game.route">
           <NuxtLink
             :to="game.route"
             class="

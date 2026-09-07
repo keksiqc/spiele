@@ -58,6 +58,7 @@ function isRevealed(peer: RoomPeer): boolean {
   return typeof value === 'boolean' ? value : developmentReveals.get(peer.id) === true
 }
 
+/** Sends an error key; clients translate it into their own language. */
 function sendError(peer: RoomPeer, value: string) {
   peer.send({ type: 'error', value } satisfies ServerMessage)
 }
@@ -81,7 +82,7 @@ function touchRoom(roomId: string, peer: RoomPeer) {
 export default defineWebSocketHandler({
   upgrade(request) {
     if (!roomIdFromUrl(request.url))
-      throw new Response('Eine gültige Room ID ist erforderlich.', { status: 400 })
+      throw new Response('A valid room ID is required.', { status: 400 })
 
     return {
       headers: { 'Cache-Control': 'no-store' },
@@ -96,7 +97,7 @@ export default defineWebSocketHandler({
     const roomPeers = peersInRoom(peer, roomId)
     if (roomPeers.length > MAX_CLIENTS) {
       peer.context.rejected = true
-      sendError(peer, 'Dieser Raum ist bereits voll.')
+      sendError(peer, 'roomFull')
       peer.close(1008, 'Room is full')
       return
     }
@@ -115,7 +116,7 @@ export default defineWebSocketHandler({
       return
 
     if (message.uint8Array().byteLength > MAX_MESSAGE_BYTES) {
-      sendError(peer, 'Die Nachricht ist zu groß.')
+      sendError(peer, 'messageTooLarge')
       return
     }
 
@@ -124,13 +125,13 @@ export default defineWebSocketHandler({
       rawMessage = message.json<unknown>()
     }
     catch {
-      sendError(peer, 'Die Nachricht war kein gültiges JSON.')
+      sendError(peer, 'invalidJson')
       return
     }
 
     const messageData = parseClientMessage(rawMessage)
     if (!messageData) {
-      sendError(peer, 'Unbekannter Spielbefehl.')
+      sendError(peer, 'unknownCommand')
       return
     }
 

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-useHead({ title: 'Seite nicht gefunden – spiele.keksi.dev' })
+const { t } = useI18n()
+
+useHead({ title: () => t('notFound.title') })
 </script>
 
 <template>
@@ -13,7 +15,7 @@ useHead({ title: 'Seite nicht gefunden – spiele.keksi.dev' })
       "
     >
       <p class="text-sm text-muted">
-        Fehler 404
+        {{ t('notFound.label') }}
       </p>
       <h1
         class="
@@ -21,14 +23,14 @@ useHead({ title: 'Seite nicht gefunden – spiele.keksi.dev' })
           sm:text-5xl
         "
       >
-        Diese Seite gibt es nicht.
+        {{ t('notFound.headline') }}
       </h1>
       <p class="mt-4 max-w-md text-lg/8 text-muted">
-        Der Link ist vielleicht veraltet. Auf der Startseite findest du alle Spiele.
+        {{ t('notFound.text') }}
       </p>
       <div class="mt-8">
         <NuxtLink to="/" class="btn btn-secondary">
-          Zur Startseite
+          {{ t('site.home') }}
         </NuxtLink>
       </div>
     </div>

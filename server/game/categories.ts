@@ -1,12 +1,6 @@
-import categoryData from '../../data/categories.json'
+import { categoryKeys } from '../../shared/categories'
 
-interface CategoryData {
-  categories: string[]
-}
-
-export const categories = Object.freeze(
-  (categoryData as CategoryData).categories.filter(category => category.trim().length > 0),
-)
+export const categories = categoryKeys
 
 function randomIndex(length: number): number {
   if (length <= 1)

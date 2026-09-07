@@ -1,0 +1,87 @@
+{
+  "site": {
+    "name": "spiele.keksi.dev",
+    "home": "Back to home",
+    "donate": "Donate",
+    "language": "Language"
+  },
+  "home": {
+    "title": "spiele.keksi.dev – small games for two",
+    "description": "Play together in the browser – currently with the association game for two people.",
+    "headline": "Small games for two, right in the browser.",
+    "intro": "Open a room, share the code, start playing. No download and no sign-up.",
+    "players": "{count} players"
+  },
+  "notFound": {
+    "title": "Page not found – spiele.keksi.dev",
+    "label": "Error 404",
+    "headline": "This page does not exist.",
+    "text": "The link may be out of date. You can find all games on the home page."
+  },
+  "game": {
+    "name": "Association game",
+    "title": "Association game – spiele.keksi.dev",
+    "description": "The association game for two people in the browser.",
+    "summary": "One category, two answers. Write in secret, reveal at the same time and build a streak.",
+    "lobby": {
+      "headline": "One category. Two minds.",
+      "intro": "Write in secret, reveal at the same time and see whether you think alike.",
+      "codeLabel": "Room code",
+      "codePlaceholder": "4 to 12 characters",
+      "join": "Join room",
+      "create": "Open a new room",
+      "privacy": "Anyone with the code can enter the room. Share it only with your partner."
+    },
+    "room": "Room",
+    "copyCode": "Copy room code",
+    "leave": "Leave room",
+    "connection": {
+      "connected": "Connected",
+      "connecting": "Connecting",
+      "offline": "Not connected"
+    },
+    "prompt": "Name something from the category",
+    "loadingCategory": "Loading category …",
+    "streak": "Streak: {count} of 5",
+    "you": "You",
+    "partner": "Partner",
+    "answerPlaceholder": "Your answer",
+    "noAnswer": "No answer",
+    "partnerReady": "Ready to reveal",
+    "partnerWriting": "Still writing",
+    "reveal": "Reveal",
+    "waitingForPartner": "Waiting for partner",
+    "correct": "Correct",
+    "wrong": "Wrong",
+    "skip": "Skip without scoring",
+    "status": {
+      "revealed": "Decide together whether the answers match.",
+      "sent": "Your answer is saved. As soon as your partner reveals, you both see the answers.",
+      "partnerReady": "Your partner is ready. Reveal as soon as you are done.",
+      "secret": "Both of you write in secret. Answers are revealed only when you are both ready."
+    },
+    "toast": {
+      "connected": "Connected – have fun!",
+      "disconnected": "The connection was lost.",
+      "correct": "Correct answer!",
+      "wrong": "Wrong answer!",
+      "revealed": "Answers revealed.",
+      "notReady": "Hold on, the connection is not ready yet.",
+      "copied": "Room code copied.",
+      "copyFailed": "Copying was not possible. Share the room code manually.",
+      "invalidCode": "The room code must be 4 to 12 letters or digits.",
+      "invalidUrlCode": "The room code in the URL is invalid."
+    }
+  },
+  "errors": {
+    "unreadableResponse": "The server response could not be read.",
+    "invalidResponse": "The server response was invalid.",
+    "connectionFailed": "The connection to the game could not be established.",
+    "server": {
+      "roomFull": "This room is already full.",
+      "messageTooLarge": "The message is too large.",
+      "invalidJson": "The message was not valid JSON.",
+      "unknownCommand": "Unknown game command."
+    }
+  }
+}

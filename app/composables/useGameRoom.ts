@@ -5,7 +5,8 @@ import { MAX_INPUT_LENGTH, normalizeRoomId, parseServerMessage } from '#shared/g
 export interface GameRoomCallbacks {
   onConnected?: () => void
   onDisconnected?: () => void
-  onError?: (message: string) => void
+  /** Receives a translation key (client-side errors) or a server error key. */
+  onError?: (key: string) => void
   onMessage?: (message: ServerMessage) => void
 }
 
@@ -73,7 +74,7 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
 
     const normalizedRoomId = normalizeRoomId(rawRoomId)
     if (!normalizedRoomId) {
-      callbacks.onError?.('Die Room ID muss aus 4 bis 12 Buchstaben oder Zahlen bestehen.')
+      callbacks.onError?.('game.toast.invalidCode')
       return false
     }
 
@@ -100,7 +101,7 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
         return
       const text = decodeMessage(event.data)
       if (!text) {
-        callbacks.onError?.('Die Serverantwort konnte nicht gelesen werden.')
+        callbacks.onError?.('errors.unreadableResponse')
         return
       }
 
@@ -109,13 +110,13 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
         rawMessage = JSON.parse(text) as unknown
       }
       catch {
-        callbacks.onError?.('Die Serverantwort war ungültig.')
+        callbacks.onError?.('errors.invalidResponse')
         return
       }
 
       const message = parseServerMessage(rawMessage)
       if (!message) {
-        callbacks.onError?.('Die Serverantwort war ungültig.')
+        callbacks.onError?.('errors.invalidResponse')
         return
       }
 
@@ -147,7 +148,7 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
           revealed.value = true
           break
         case 'error':
-          callbacks.onError?.(message.value)
+          callbacks.onError?.(`errors.server.${message.value}`)
           break
       }
 
@@ -156,7 +157,7 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
 
     nextSocket.onerror = () => {
       if (socket.value === nextSocket)
-        callbacks.onError?.('Die Verbindung zum Spiel konnte nicht hergestellt werden.')
+        callbacks.onError?.('errors.connectionFailed')
     }
 
     nextSocket.onclose = () => {

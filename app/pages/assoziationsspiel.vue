@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { localizeCategory } from '#shared/categories'
 import { MAX_ROOM_ID_LENGTH, normalizeRoomId } from '#shared/game'
 import ToastStack from '~/components/ToastStack.vue'
 import { useGameRoom } from '~/composables/useGameRoom'
@@ -10,6 +11,7 @@ const route = useRoute()
 const router = useRouter()
 const roomInput = ref('')
 const { notify, toasts } = useToasts()
+const { locale, t, te } = useI18n()
 
 const {
   connected,
@@ -28,16 +30,16 @@ const {
   updateInput,
   join,
 } = useGameRoom({
-  onConnected: () => notify('Verbunden – viel Spaß!', 'success'),
-  onDisconnected: () => notify('Die Verbindung wurde getrennt.', 'error'),
-  onError: message => notify(message, 'error'),
+  onConnected: () => notify(t('game.toast.connected'), 'success'),
+  onDisconnected: () => notify(t('game.toast.disconnected'), 'error'),
+  onError: key => notify(te(key) ? t(key) : key, 'error'),
   onMessage: (message) => {
     if (message.type === 'streak')
-      notify('Richtige Antwort!', 'success')
+      notify(t('game.toast.correct'), 'success')
     if (message.type === 'resetStreak')
-      notify('Falsche Antwort!', 'error')
+      notify(t('game.toast.wrong'), 'error')
     if (message.type === 'allRevealed')
-      notify('Antworten aufgedeckt.', 'info')
+      notify(t('game.toast.revealed'), 'info')
   },
 })
 
@@ -46,20 +48,21 @@ const canReveal = computed(() => connected.value && !inputLocked.value)
 const canResolve = computed(() => connected.value && revealed.value)
 const revealStatus = computed(() => {
   if (revealed.value)
-    return 'Entscheidet gemeinsam, ob die Antworten zusammenpassen.'
+    return t('game.status.revealed')
   if (revealSent.value)
-    return 'Deine Antwort ist gespeichert. Sobald dein Mitspieler aufdeckt, seht ihr beide Antworten.'
+    return t('game.status.sent')
   if (partnerRevealed.value)
-    return 'Dein Mitspieler ist bereit. Deck auf, sobald du fertig bist.'
-  return 'Beide schreiben geheim. Aufgedeckt wird erst, wenn ihr beide bereit seid.'
+    return t('game.status.partnerReady')
+  return t('game.status.secret')
 })
 const connectionLabel = computed(() => {
   if (connected.value)
-    return 'Verbunden'
+    return t('game.connection.connected')
   if (connecting.value)
-    return 'Verbindung wird hergestellt'
-  return 'Nicht verbunden'
+    return t('game.connection.connecting')
+  return t('game.connection.offline')
 })
+const categoryLabel = computed(() => localizeCategory(currentCategory.value, locale.value))
 
 function createRoomId(): string {
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
@@ -86,7 +89,7 @@ function normalizeRoomInput() {
 function joinRoom(value: unknown = roomInput.value) {
   const normalized = normalizeRoomId(value)
   if (!normalized) {
-    notify('Der Raum-Code muss aus 4 bis 12 Buchstaben oder Zahlen bestehen.', 'warning')
+    notify(t('game.toast.invalidCode'), 'warning')
     return
   }
 
@@ -127,7 +130,7 @@ function handleCorrect() {
     return
 
   streak.value = nextStreak
-  notify('Richtige Antwort!', 'success')
+  notify(t('game.toast.correct'), 'success')
   nextCategory()
 }
 
@@ -138,13 +141,13 @@ function handleWrong() {
     return
 
   streak.value = 0
-  notify('Falsche Antwort!', 'error')
+  notify(t('game.toast.wrong'), 'error')
   nextCategory()
 }
 
 function nextCategory() {
   if (!send({ type: 'newCategory' }))
-    notify('Warte kurz, die Verbindung ist noch nicht bereit.', 'warning')
+    notify(t('game.toast.notReady'), 'warning')
 }
 
 async function copyRoomId() {
@@ -153,10 +156,10 @@ async function copyRoomId() {
 
   try {
     await navigator.clipboard.writeText(roomId.value)
-    notify('Raum-Code kopiert.', 'success')
+    notify(t('game.toast.copied'), 'success')
   }
   catch {
-    notify('Kopieren war nicht möglich. Teile den Raum-Code manuell.', 'warning')
+    notify(t('game.toast.copyFailed'), 'warning')
   }
 }
 
@@ -167,7 +170,7 @@ onMounted(() => {
 
   const normalized = normalizeRoomId(queryRoom)
   if (!normalized) {
-    notify('Der Raum-Code in der URL ist ungültig.', 'warning')
+    notify(t('game.toast.invalidUrlCode'), 'warning')
     void router.replace({ query: {} })
     return
   }
@@ -177,11 +180,11 @@ onMounted(() => {
 })
 
 useHead({
-  title: 'Assoziationsspiel – spiele.keksi.dev',
+  title: () => t('game.title'),
   meta: [
     {
       name: 'description',
-      content: 'Das große Assoziationsspiel für zwei Personen im Browser.',
+      content: () => t('game.description'),
     },
   ],
 })
@@ -202,11 +205,11 @@ useHead({
             hidden text-muted
             sm:inline
           "
-        >Raum</span>
+        >{{ t('game.room') }}</span>
         <span class="font-semibold tracking-[0.12em]">{{ roomId }}</span>
         <button
           type="button"
-          aria-label="Raum-Code kopieren"
+          :aria-label="t('game.copyCode')"
           class="
             grid size-8 place-items-center rounded-md text-muted
             transition-colors
@@ -238,15 +241,15 @@ useHead({
             sm:text-5xl
           "
         >
-          Eine Kategorie. Zwei Gedanken.
+          {{ t('game.lobby.headline') }}
         </h1>
         <p class="mt-5 text-lg/8 text-muted">
-          Schreibt geheim, deckt gleichzeitig auf und seht, ob ihr an dasselbe denkt.
+          {{ t('game.lobby.intro') }}
         </p>
 
         <form class="mt-10" @submit.prevent="joinRoom()">
           <label for="room-id" class="block text-sm text-muted">
-            Raum-Code
+            {{ t('game.lobby.codeLabel') }}
           </label>
           <input
             id="room-id"
@@ -255,7 +258,7 @@ useHead({
             autocomplete="off"
             inputmode="text"
             spellcheck="false"
-            placeholder="4 bis 12 Zeichen"
+            :placeholder="t('game.lobby.codePlaceholder')"
             class="mt-2 field field-code"
             @input="normalizeRoomInput"
           >
@@ -268,16 +271,16 @@ useHead({
             <button
               type="submit" :disabled="!roomInput" class="btn btn-primary"
             >
-              Raum beitreten
+              {{ t('game.lobby.join') }}
             </button>
             <button type="button" class="btn btn-secondary" @click="createRoom">
-              Neuen Raum öffnen
+              {{ t('game.lobby.create') }}
             </button>
           </div>
         </form>
 
         <p class="mt-8 text-sm/6 text-faint">
-          Wer den Code hat, kommt in den Raum. Teile ihn nur mit deinem Mitspieler.
+          {{ t('game.lobby.privacy') }}
         </p>
       </section>
 
@@ -302,7 +305,7 @@ useHead({
             {{ connectionLabel }}
           </span>
           <button type="button" class="btn btn-ghost" @click="leaveRoom">
-            Raum verlassen
+            {{ t('game.leave') }}
           </button>
         </div>
 
@@ -313,19 +316,19 @@ useHead({
           "
         >
           <p class="text-sm text-muted">
-            Nennt etwas aus der Kategorie
+            {{ t('game.prompt') }}
           </p>
           <h1
             class="category-word mt-3"
-            :class="{ 'category-word-long': currentCategory.length > 13 }"
+            :class="{ 'category-word-long': categoryLabel.length > 13 }"
           >
-            <span v-if="currentCategory">{{ currentCategory }}</span>
-            <span v-else class="category-placeholder">Kategorie wird geladen …</span>
+            <span v-if="currentCategory">{{ categoryLabel }}</span>
+            <span v-else class="category-placeholder">{{ t('game.loadingCategory') }}</span>
           </h1>
           <div
             class="mt-7 inline-flex items-center justify-center gap-1.5"
             role="img"
-            :aria-label="`Serie: ${streak} von 5`"
+            :aria-label="t('game.streak', { count: streak })"
           >
             <span
               v-for="step in 5"
@@ -344,14 +347,14 @@ useHead({
             "
           >
             <div class="grid gap-2 text-center">
-              <label for="my-association" class="text-sm text-muted">Du</label>
+              <label for="my-association" class="text-sm text-muted">{{ t('game.you') }}</label>
               <input
                 id="my-association"
                 :value="myInput"
                 :disabled="inputLocked || !connected"
                 maxlength="120"
                 autocomplete="off"
-                placeholder="Deine Antwort"
+                :placeholder="t('game.answerPlaceholder')"
                 class="field field-answer"
                 @input="handleInput"
               >
@@ -359,7 +362,7 @@ useHead({
 
             <div class="grid gap-2 text-center">
               <p class="text-sm text-muted">
-                Mitspieler
+                {{ t('game.partner') }}
               </p>
               <Transition name="reveal" mode="out-in">
                 <div
@@ -367,10 +370,10 @@ useHead({
                   class="answer-box"
                   :class="{ 'answer-empty': !partnerInput }"
                 >
-                  {{ partnerInput || 'Keine Antwort' }}
+                  {{ partnerInput || t('game.noAnswer') }}
                 </div>
                 <div v-else class="answer-hidden">
-                  {{ partnerRevealed ? 'Bereit zum Aufdecken' : 'Schreibt noch' }}
+                  {{ partnerRevealed ? t('game.partnerReady') : t('game.partnerWriting') }}
                 </div>
               </Transition>
             </div>
@@ -388,7 +391,7 @@ useHead({
                 @click="handleReveal"
               >
                 <Icon name="lucide:eye" aria-hidden="true" class="size-4" />
-                {{ revealSent ? 'Warte auf Mitspieler' : 'Aufdecken' }}
+                {{ revealSent ? t('game.waitingForPartner') : t('game.reveal') }}
               </button>
             </template>
             <template v-else>
@@ -405,7 +408,7 @@ useHead({
                   " @click="handleCorrect"
                 >
                   <Icon name="lucide:check" aria-hidden="true" class="size-4" />
-                  Richtig
+                  {{ t('game.correct') }}
                 </button>
                 <button
                   type="button" :disabled="!canResolve" class="
@@ -414,13 +417,13 @@ useHead({
                   " @click="handleWrong"
                 >
                   <Icon name="lucide:x" aria-hidden="true" class="size-4" />
-                  Falsch
+                  {{ t('game.wrong') }}
                 </button>
               </div>
               <button
                 type="button" :disabled="!canResolve" class="btn btn-ghost" @click="nextCategory"
               >
-                Ohne Wertung weiter
+                {{ t('game.skip') }}
               </button>
             </template>
             <p class="max-w-sm text-center text-sm/6 text-faint">

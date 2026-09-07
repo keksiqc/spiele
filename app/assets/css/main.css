@@ -134,6 +134,49 @@ input {
   }
 }
 
+@utility lang-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  min-width: 10rem;
+  margin: 0;
+  padding: 0.3rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  box-shadow: 0 12px 32px rgb(5 2 14 / 0.45);
+  list-style: none;
+}
+
+@utility lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background: rgb(221 214 254 / 0.08);
+    color: var(--color-cloud);
+    outline: none;
+  }
+}
+
+@utility lang-option-active {
+  color: var(--color-cloud);
+  font-weight: 600;
+}
+
 /* Inputs */
 
 @utility field {
@@ -313,6 +356,19 @@ input {
 }
 
 /* Vue transitions */
+
+.menu-enter-active,
+.menu-leave-active {
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.menu-enter-from,
+.menu-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
 
 .reveal-enter-active {
   transition:

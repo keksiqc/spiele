@@ -1,0 +1,87 @@
+{
+  "site": {
+    "name": "spiele.keksi.dev",
+    "home": "Zur Startseite",
+    "donate": "Spenden",
+    "language": "Sprache"
+  },
+  "home": {
+    "title": "spiele.keksi.dev – kleine Spiele für zwei",
+    "description": "Spiele gemeinsam im Browser – aktuell mit dem Assoziationsspiel für zwei Personen.",
+    "headline": "Kleine Spiele für zwei, direkt im Browser.",
+    "intro": "Raum öffnen, Code teilen, losspielen. Ohne Download und ohne Anmeldung.",
+    "players": "{count} Spieler"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden – spiele.keksi.dev",
+    "label": "Fehler 404",
+    "headline": "Diese Seite gibt es nicht.",
+    "text": "Der Link ist vielleicht veraltet. Auf der Startseite findest du alle Spiele."
+  },
+  "game": {
+    "name": "Assoziationsspiel",
+    "title": "Assoziationsspiel – spiele.keksi.dev",
+    "description": "Das Assoziationsspiel für zwei Personen im Browser.",
+    "summary": "Eine Kategorie, zwei Antworten. Schreibt geheim, deckt gleichzeitig auf und baut eine Serie auf.",
+    "lobby": {
+      "headline": "Eine Kategorie. Zwei Gedanken.",
+      "intro": "Schreibt geheim, deckt gleichzeitig auf und seht, ob ihr an dasselbe denkt.",
+      "codeLabel": "Raum-Code",
+      "codePlaceholder": "4 bis 12 Zeichen",
+      "join": "Raum beitreten",
+      "create": "Neuen Raum öffnen",
+      "privacy": "Wer den Code hat, kommt in den Raum. Teile ihn nur mit deinem Mitspieler."
+    },
+    "room": "Raum",
+    "copyCode": "Raum-Code kopieren",
+    "leave": "Raum verlassen",
+    "connection": {
+      "connected": "Verbunden",
+      "connecting": "Verbindung wird hergestellt",
+      "offline": "Nicht verbunden"
+    },
+    "prompt": "Nennt etwas aus der Kategorie",
+    "loadingCategory": "Kategorie wird geladen …",
+    "streak": "Serie: {count} von 5",
+    "you": "Du",
+    "partner": "Mitspieler",
+    "answerPlaceholder": "Deine Antwort",
+    "noAnswer": "Keine Antwort",
+    "partnerReady": "Bereit zum Aufdecken",
+    "partnerWriting": "Schreibt noch",
+    "reveal": "Aufdecken",
+    "waitingForPartner": "Warte auf Mitspieler",
+    "correct": "Richtig",
+    "wrong": "Falsch",
+    "skip": "Ohne Wertung weiter",
+    "status": {
+      "revealed": "Entscheidet gemeinsam, ob die Antworten zusammenpassen.",
+      "sent": "Deine Antwort ist gespeichert. Sobald dein Mitspieler aufdeckt, seht ihr beide Antworten.",
+      "partnerReady": "Dein Mitspieler ist bereit. Deck auf, sobald du fertig bist.",
+      "secret": "Beide schreiben geheim. Aufgedeckt wird erst, wenn ihr beide bereit seid."
+    },
+    "toast": {
+      "connected": "Verbunden – viel Spaß!",
+      "disconnected": "Die Verbindung wurde getrennt.",
+      "correct": "Richtige Antwort!",
+      "wrong": "Falsche Antwort!",
+      "revealed": "Antworten aufgedeckt.",
+      "notReady": "Warte kurz, die Verbindung ist noch nicht bereit.",
+      "copied": "Raum-Code kopiert.",
+      "copyFailed": "Kopieren war nicht möglich. Teile den Raum-Code manuell.",
+      "invalidCode": "Der Raum-Code muss aus 4 bis 12 Buchstaben oder Zahlen bestehen.",
+      "invalidUrlCode": "Der Raum-Code in der URL ist ungültig."
+    }
+  },
+  "errors": {
+    "unreadableResponse": "Die Serverantwort konnte nicht gelesen werden.",
+    "invalidResponse": "Die Serverantwort war ungültig.",
+    "connectionFailed": "Die Verbindung zum Spiel konnte nicht hergestellt werden.",
+    "server": {
+      "roomFull": "Dieser Raum ist bereits voll.",
+      "messageTooLarge": "Die Nachricht ist zu groß.",
+      "invalidJson": "Die Nachricht war kein gültiges JSON.",
+      "unknownCommand": "Unbekannter Spielbefehl."
+    }
+  }
+}

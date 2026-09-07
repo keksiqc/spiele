@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const { t } = useI18n()
+</script>
+
 <template>
   <header
     class="
@@ -8,7 +12,7 @@
     <NuxtLink
       to="/"
       class="
-        inline-flex items-center gap-2 text-sm font-semibold text-cloud
+        inline-flex items-center gap-2 text-sm lang-option-active
         transition-colors
         hover:text-lilac
       "
@@ -25,11 +29,12 @@
           hidden
           sm:inline
         "
-      >spiele.keksi.dev</span>
+      >{{ t('site.name') }}</span>
     </NuxtLink>
 
     <div class="flex items-center gap-2">
       <slot />
+      <LanguageSelect />
       <DonateButton />
     </div>
   </header>

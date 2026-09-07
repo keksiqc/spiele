@@ -1,5 +1,7 @@
 <script setup lang="ts">
-useHead({ htmlAttrs: { lang: 'de' } })
+const { locale } = useI18n()
+
+useHead({ htmlAttrs: { lang: locale } })
 </script>
 
 <template>
