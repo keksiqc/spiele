@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { toast } from 'vue-sonner'
@@ -61,6 +62,7 @@ const connectionLabel = computed(() => {
   return t('game.connection.offline')
 })
 const categoryLabel = computed(() => localizeCategory(currentCategory.value, locale.value))
+const { copy: copyToClipboard, isSupported: clipboardSupported } = useClipboard()
 
 type ToastTone = 'success' | 'error' | 'warning' | 'info'
 
@@ -155,11 +157,16 @@ function nextCategory() {
 }
 
 async function copyRoomId() {
-  if (!import.meta.client || !roomId.value)
+  if (!roomId.value)
     return
 
+  if (!clipboardSupported.value) {
+    notify(t('game.toast.copyFailed'), 'warning')
+    return
+  }
+
   try {
-    await navigator.clipboard.writeText(roomId.value)
+    await copyToClipboard(roomId.value)
     notify(t('game.toast.copied'), 'success')
   }
   catch {

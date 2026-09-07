@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onClickOutside } from '@vueuse/core'
+
 const { locale, locales, setLocale, t } = useI18n()
 
 type LocaleCode = typeof locale.value
@@ -15,6 +17,8 @@ function close(restoreFocus = false) {
   if (restoreFocus)
     trigger.value?.focus()
 }
+
+onClickOutside(root, () => close())
 
 async function toggle() {
   open.value = !open.value
@@ -76,14 +80,6 @@ function onOptionKeydown(event: KeyboardEvent, index: number, code: LocaleCode) 
       break
   }
 }
-
-function onPointerDown(event: PointerEvent) {
-  if (open.value && root.value && !root.value.contains(event.target as Node))
-    close()
-}
-
-onMounted(() => document.addEventListener('pointerdown', onPointerDown))
-onBeforeUnmount(() => document.removeEventListener('pointerdown', onPointerDown))
 </script>
 
 <template>
