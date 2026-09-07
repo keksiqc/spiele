@@ -2,9 +2,35 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  modules: ['@nuxt/eslint'],
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon'],
+
+  css: ['~/assets/css/main.css'],
+  compatibilityDate: '2026-09-07',
+
+  nitro: {
+    preset: 'cloudflare_durable',
+    experimental: {
+      websocket: true,
+    },
+    cloudflare: {
+      deployConfig: false,
+      dev: {
+        configPath: 'wrangler.dev.jsonc',
+      },
+      nodeCompat: true,
+    },
+  },
+
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+
+  typescript: {
+    strict: true,
+  },
 
   eslint: {
     config: {
@@ -14,11 +40,5 @@ export default defineNuxtConfig({
       },
     },
 
-  },
-
-  vite: {
-    plugins: [
-      tailwindcss(),
-    ],
   },
 })

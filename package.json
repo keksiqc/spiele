@@ -1,28 +1,39 @@
 {
   "name": "spiele",
   "type": "module",
+  "version": "2.0.0",
   "private": true,
+  "packageManager": "bun@1.4.2",
+  "description": "A two-player association game running on Nuxt and Cloudflare Workers.",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "preview": "nuxt build && wrangler dev",
+    "preview:nuxt": "nuxt preview",
+    "deploy": "nuxt build && wrangler deploy",
+    "cf-typegen": "wrangler types",
+    "typecheck": "wrangler types && nuxt typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/eslint": "1.17.0",
-    "@nuxt/fonts": "0.14.0",
-    "@nuxt/icon": "2.5.1",
-    "@tailwindcss/vite": "^4.3.3",
-    "nuxt": "^4.5.2",
-    "tailwindcss": "^4.3.3",
-    "vue": "^3.5.42"
+    "nuxt": "^4.5.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.5.1",
+    "@cloudflare/workers-types": "^5.20260907.1",
+    "@nuxt/eslint": "1.17.0",
+    "@tailwindcss/vite": "^4.3.3",
     "eslint": "^10.9.1",
-    "eslint-plugin-format": "^2.0.1"
+    "eslint-plugin-better-tailwindcss": "^4.7.0",
+    "eslint-plugin-format": "^2.0.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.0",
+    "vue-tsc": "^3.3.11",
+    "wrangler": "^4.129.0"
   }
 }

@@ -1,1 +1,53 @@
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  background: #070817;
+}
+
+html,
+body,
+#__nuxt {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  background: #070817;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  color: #f8fafc;
+  background: #7c3aed;
+}
+
+@utility page-grid {
+  background-image:
+    linear-gradient(rgb(148 163 184 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(148 163 184 / 0.045) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: all 180ms ease;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+}
