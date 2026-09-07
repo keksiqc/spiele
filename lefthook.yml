@@ -1,0 +1,5 @@
+pre-commit:
+  commands:
+    check:
+      run: bunx eslint --fix {staged_files}
+      stage_fixed: true
