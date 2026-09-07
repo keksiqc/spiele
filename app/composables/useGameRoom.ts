@@ -25,6 +25,7 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
   const currentCategory = ref('')
   const myInput = ref('')
   const partnerInput = ref('')
+  const partnerRevealed = ref(false)
   const revealed = ref(false)
   const revealSent = ref(false)
   const streak = ref(0)
@@ -34,6 +35,7 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
     currentCategory.value = ''
     myInput.value = ''
     partnerInput.value = ''
+    partnerRevealed.value = false
     revealed.value = false
     revealSent.value = false
     streak.value = 0
@@ -121,8 +123,10 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
         case 'playerInput':
           partnerInput.value = message.value
           break
-        case 'reveal':
-          revealed.value = true
+        case 'peerRevealed':
+          // This only means the other player is ready. The answers stay
+          // hidden until the server confirms that every player revealed.
+          partnerRevealed.value = true
           break
         case 'streak':
           streak.value = message.value
@@ -134,10 +138,12 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
           currentCategory.value = message.value
           myInput.value = ''
           partnerInput.value = ''
+          partnerRevealed.value = false
           revealed.value = false
           revealSent.value = false
           break
         case 'allRevealed':
+          partnerRevealed.value = false
           revealed.value = true
           break
         case 'error':
@@ -188,6 +194,7 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
     currentCategory,
     myInput,
     partnerInput,
+    partnerRevealed,
     revealed,
     revealSent,
     streak,

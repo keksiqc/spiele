@@ -164,7 +164,7 @@ export default defineWebSocketHandler({
         state.revealedCount = roomPeers.filter(isRevealed).length
         state.lastActivity = Date.now()
         store.write(roomId, state)
-        sendToRoom(peer, roomId, { type: 'reveal' }, peer)
+        sendToRoom(peer, roomId, { type: 'peerRevealed' }, peer)
 
         if (state.revealedCount >= roomPeers.length && roomPeers.length > 0) {
           for (const candidate of roomPeers)

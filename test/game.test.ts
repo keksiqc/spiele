@@ -29,5 +29,8 @@ describe('game protocol', () => {
       type: 'streak',
       value: 5,
     })
+    expect(parseServerMessage({ type: 'peerRevealed' })).toEqual({
+      type: 'peerRevealed',
+    })
   })
 })

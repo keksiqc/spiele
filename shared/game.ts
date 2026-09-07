@@ -12,7 +12,7 @@ export type ClientMessage
 
 export type ServerMessage
   = | { type: 'playerInput', value: string }
-    | { type: 'reveal' }
+    | { type: 'peerRevealed' }
     | { type: 'streak', value: number }
     | { type: 'resetStreak' }
     | { type: 'newCategory', value: string }
@@ -66,8 +66,8 @@ export function parseServerMessage(value: unknown): ServerMessage | null {
       return typeof value.value === 'string'
         ? { type: 'playerInput', value: value.value.slice(0, MAX_INPUT_LENGTH) }
         : null
-    case 'reveal':
-      return { type: 'reveal' }
+    case 'peerRevealed':
+      return { type: 'peerRevealed' }
     case 'streak':
       return typeof value.value === 'number' && Number.isFinite(value.value)
         ? { type: 'streak', value: Math.min(5, Math.max(0, Math.trunc(value.value))) }

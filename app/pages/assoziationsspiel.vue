@@ -20,6 +20,7 @@ const {
   leave,
   myInput,
   partnerInput,
+  partnerRevealed,
   revealSent,
   revealed,
   roomId,
@@ -461,9 +462,16 @@ useHead({
                     sm:block
                   "
                 >
-                  Beide antworten geheim. Klicke auf <span
-                    class="font-semibold text-slate-300"
-                  >Reveal</span>, sobald du bereit bist.
+                  <template v-if="partnerRevealed">
+                    Dein Mitspieler ist bereit. Klicke auf <span
+                      class="font-semibold text-slate-300"
+                    >Reveal</span>, damit ihr beide die Antworten aufdeckt.
+                  </template>
+                  <template v-else>
+                    Beide antworten geheim. Klicke auf <span
+                      class="font-semibold text-slate-300"
+                    >Reveal</span>, sobald du bereit bist.
+                  </template>
                 </div>
               </div>
 
