@@ -2,7 +2,6 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { MAX_ROOM_ID_LENGTH, normalizeRoomId } from '#shared/game'
-import DonateButton from '~/components/DonateButton.vue'
 import ToastStack from '~/components/ToastStack.vue'
 import { useGameRoom } from '~/composables/useGameRoom'
 import { useToasts } from '~/composables/useToasts'
@@ -38,13 +37,22 @@ const {
     if (message.type === 'resetStreak')
       notify('Falsche Antwort!', 'error')
     if (message.type === 'allRevealed')
-      notify('Antwort aufgedeckt.', 'info')
+      notify('Antworten aufgedeckt.', 'info')
   },
 })
 
 const inputLocked = computed(() => revealSent.value || revealed.value)
 const canReveal = computed(() => connected.value && !inputLocked.value)
 const canResolve = computed(() => connected.value && revealed.value)
+const revealStatus = computed(() => {
+  if (revealed.value)
+    return 'Entscheidet gemeinsam, ob die Antworten zusammenpassen.'
+  if (revealSent.value)
+    return 'Deine Antwort ist gespeichert. Sobald dein Mitspieler aufdeckt, seht ihr beide Antworten.'
+  if (partnerRevealed.value)
+    return 'Dein Mitspieler ist bereit. Deck auf, sobald du fertig bist.'
+  return 'Beide schreiben geheim. Aufgedeckt wird erst, wenn ihr beide bereit seid.'
+})
 const connectionLabel = computed(() => {
   if (connected.value)
     return 'Verbunden'
@@ -78,7 +86,7 @@ function normalizeRoomInput() {
 function joinRoom(value: unknown = roomInput.value) {
   const normalized = normalizeRoomId(value)
   if (!normalized) {
-    notify('Die Room ID muss aus 4 bis 12 Buchstaben oder Zahlen bestehen.', 'warning')
+    notify('Der Raum-Code muss aus 4 bis 12 Buchstaben oder Zahlen bestehen.', 'warning')
     return
   }
 
@@ -145,10 +153,10 @@ async function copyRoomId() {
 
   try {
     await navigator.clipboard.writeText(roomId.value)
-    notify('Room ID kopiert!', 'success')
+    notify('Raum-Code kopiert.', 'success')
   }
   catch {
-    notify('Kopieren war nicht möglich – teile die Room ID manuell.', 'warning')
+    notify('Kopieren war nicht möglich. Teile den Raum-Code manuell.', 'warning')
   }
 }
 
@@ -159,7 +167,7 @@ onMounted(() => {
 
   const normalized = normalizeRoomId(queryRoom)
   if (!normalized) {
-    notify('Die Room ID in der URL ist ungültig.', 'warning')
+    notify('Der Raum-Code in der URL ist ungültig.', 'warning')
     void router.replace({ query: {} })
     return
   }
@@ -180,353 +188,249 @@ useHead({
 </script>
 
 <template>
-  <main
-    class="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100"
-  >
-    <div class="pointer-events-none absolute inset-0 page-grid" aria-hidden="true" />
-    <div
-      class="
-        pointer-events-none absolute top-0 left-1/2 size-128 -translate-x-1/2
-        rounded-full bg-violet-600/15 blur-3xl
-      " aria-hidden="true"
-    />
-
-    <header
-      class="
-        relative mx-auto flex max-w-5xl items-center justify-between gap-4 p-5
-        sm:px-8
-      "
-    >
-      <div class="flex min-w-0 items-center gap-3">
-        <NuxtLink
-          to="/" class="
-            grid size-9 shrink-0 place-items-center rounded-xl bg-white/8
-            text-sm font-black text-slate-200 transition
-            hover:bg-white/15
+  <main class="flex min-h-screen flex-col">
+    <AppHeader>
+      <div
+        v-if="joined"
+        class="
+          inline-flex items-center gap-1 rounded-lg border border-line pl-3
+          text-sm
+        "
+      >
+        <span
+          class="
+            hidden text-muted
+            sm:inline
           "
-        >
-          ←
-        </NuxtLink>
-        <div
-          v-if="joined" class="
-            flex min-w-0 items-center gap-2 rounded-xl border border-white/10
-            bg-white/5 px-3 py-2 font-mono text-sm text-slate-300
+        >Raum</span>
+        <span class="font-semibold tracking-[0.12em]">{{ roomId }}</span>
+        <button
+          type="button"
+          aria-label="Raum-Code kopieren"
+          class="
+            grid size-8 place-items-center rounded-md text-muted
+            transition-colors
+            hover:bg-line hover:text-cloud
           "
+          @click="copyRoomId"
         >
-          <span class="truncate">{{ roomId }}</span>
-          <button
-            type="button" class="
-              rounded-lg p-1 text-slate-400 transition
-              hover:bg-white/10 hover:text-white
-            " aria-label="Room ID kopieren" @click="copyRoomId"
-          >
-            <svg
-              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="
-                size-4 fill-none stroke-current stroke-2
-              "
-            ><rect width="13" height="13" x="9" y="9" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-          </button>
-        </div>
+          <Icon name="lucide:copy" class="size-4" />
+        </button>
       </div>
-      <DonateButton />
-    </header>
+    </AppHeader>
 
     <div
       class="
-        relative mx-auto max-w-5xl px-5 pt-10 pb-20
-        sm:px-8 sm:pt-16
+        mx-auto flex w-full max-w-3xl flex-1 flex-col px-5 pb-24
+        sm:px-6
       "
     >
-      <div class="mx-auto max-w-3xl">
-        <div class="mb-10 text-center">
-          <p
-            class="
-              text-sm font-semibold tracking-[0.22em] text-sky-200/80 uppercase
-            "
-          >
-            Das große
-          </p>
-          <h1
-            class="
-              mt-3 text-5xl font-black tracking-tight
-              sm:text-7xl
-            "
-          >
-            <span
-              class="
-                bg-linear-to-r from-sky-200 via-violet-300 to-pink-300
-                bg-clip-text text-transparent
-              "
-            >Assoziations</span>
-            <span
-              class="
-                mt-1 block text-3xl font-light text-slate-300
-                sm:text-4xl
-              "
-            >Spiel</span>
-          </h1>
-        </div>
-
-        <section
-          v-if="!joined" class="
-            mx-auto max-w-xl rounded-4xl border border-white/10 bg-white/5.5 p-1
-            shadow-2xl shadow-black/25 backdrop-blur-xl
+      <section
+        v-if="!joined"
+        class="
+          mx-auto w-full max-w-md pt-16
+          sm:pt-24
+        "
+      >
+        <h1
+          class="
+            text-4xl font-bold tracking-tight text-balance
+            sm:text-5xl
           "
         >
-          <form
-            class="
-              rounded-[1.8rem] border border-white/5 bg-slate-950/60 p-6
-              sm:p-8
-            " @submit.prevent="joinRoom()"
-          >
-            <div class="mb-7">
-              <p
-                class="
-                  text-sm font-semibold tracking-[0.16em] text-violet-300
-                  uppercase
-                "
-              >
-                Neues Spiel
-              </p>
-              <h2 class="mt-2 text-2xl font-bold text-white">
-                Raum betreten
-              </h2>
-              <p class="mt-2 text-sm/6 text-slate-400">
-                Teile die Room ID mit deinem Mitspieler. Eine Person kann einen neuen Raum erstellen.
-              </p>
-            </div>
-            <label
-              for="room-id" class="
-                mb-2 block text-sm font-medium text-slate-300
-              "
-            >Room ID</label>
-            <input
-              id="room-id"
-              v-model="roomInput"
-              :maxlength="MAX_ROOM_ID_LENGTH"
-              autocomplete="off"
-              inputmode="text"
-              spellcheck="false"
-              placeholder="z. B. AB12CD"
-              class="
-                w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4
-                text-center font-mono text-xl font-bold tracking-[0.24em]
-                text-white transition outline-none
-                placeholder:font-sans placeholder:text-base
-                placeholder:font-normal placeholder:tracking-normal
-                focus:border-violet-300/60 focus:bg-white/8 focus:ring-4
-                focus:ring-violet-400/10
-              "
-              @input="normalizeRoomInput"
-            >
-            <div
-              class="
-                mt-5 grid gap-3
-                sm:grid-cols-2
-              "
-            >
-              <button
-                type="submit" :disabled="!roomInput" class="
-                  rounded-2xl bg-white px-5 py-4 text-sm font-bold
-                  text-slate-950 transition
-                  hover:bg-violet-200
-                  disabled:cursor-not-allowed disabled:opacity-40
-                "
-              >
-                Beitreten
-              </button>
-              <button
-                type="button" class="
-                  rounded-2xl border border-white/10 bg-white/5 px-5 py-4
-                  text-sm font-bold text-white transition
-                  hover:border-sky-300/30 hover:bg-white/10
-                " @click="createRoom"
-              >
-                Raum erstellen
-              </button>
-            </div>
-          </form>
-        </section>
+          Eine Kategorie. Zwei Gedanken.
+        </h1>
+        <p class="mt-5 text-lg/8 text-muted">
+          Schreibt geheim, deckt gleichzeitig auf und seht, ob ihr an dasselbe denkt.
+        </p>
 
-        <section v-else class="space-y-5">
+        <form class="mt-10" @submit.prevent="joinRoom()">
+          <label for="room-id" class="block text-sm text-muted">
+            Raum-Code
+          </label>
+          <input
+            id="room-id"
+            v-model="roomInput"
+            :maxlength="MAX_ROOM_ID_LENGTH"
+            autocomplete="off"
+            inputmode="text"
+            spellcheck="false"
+            placeholder="4 bis 12 Zeichen"
+            class="mt-2 field field-code"
+            @input="normalizeRoomInput"
+          >
           <div
             class="
-              flex flex-wrap items-center justify-between gap-3 rounded-2xl
-              border border-white/10 bg-white/4.5 px-4 py-3 text-sm
+              mt-3 grid gap-3
+              sm:grid-cols-2
             "
           >
-            <div class="flex items-center gap-2 text-slate-300">
-              <span
-                class="size-2 rounded-full" :class="connected ? `
-                  bg-emerald-300 shadow-[0_0_12px] shadow-emerald-300
-                ` : connecting ? `animate-pulse bg-amber-300` : `bg-rose-300`"
-              />
-              {{ connectionLabel }}
-            </div>
             <button
-              type="button" class="
-                text-slate-400 underline-offset-4 transition
-                hover:text-white hover:underline
-              " @click="leaveRoom"
+              type="submit" :disabled="!roomInput" class="btn btn-primary"
             >
-              Raum verlassen
+              Raum beitreten
+            </button>
+            <button type="button" class="btn btn-secondary" @click="createRoom">
+              Neuen Raum öffnen
             </button>
           </div>
+        </form>
 
+        <p class="mt-8 text-sm/6 text-faint">
+          Wer den Code hat, kommt in den Raum. Teile ihn nur mit deinem Mitspieler.
+        </p>
+      </section>
+
+      <section
+        v-else class="
+          flex flex-1 flex-col pt-2
+          sm:pt-6
+        "
+      >
+        <div
+          class="flex items-center justify-between gap-3 text-sm text-muted"
+        >
+          <span class="inline-flex items-center gap-2">
+            <span
+              class="status-dot"
+              :class="{
+                'status-online': connected,
+                'status-connecting': !connected && connecting,
+                'status-offline': !connected && !connecting,
+              }"
+            />
+            {{ connectionLabel }}
+          </span>
+          <button type="button" class="btn btn-ghost" @click="leaveRoom">
+            Raum verlassen
+          </button>
+        </div>
+
+        <div
+          class="
+            flex flex-1 flex-col justify-center py-10 text-center
+            sm:py-14
+          "
+        >
+          <p class="text-sm text-muted">
+            Nennt etwas aus der Kategorie
+          </p>
+          <h1
+            class="category-word mt-3"
+            :class="{ 'category-word-long': currentCategory.length > 13 }"
+          >
+            <span v-if="currentCategory">{{ currentCategory }}</span>
+            <span v-else class="category-placeholder">Kategorie wird geladen …</span>
+          </h1>
+          <div
+            class="mt-7 inline-flex items-center justify-center gap-1.5"
+            role="img"
+            :aria-label="`Serie: ${streak} von 5`"
+          >
+            <span
+              v-for="step in 5"
+              :key="step"
+              class="streak-tick"
+              :class="{ 'streak-tick-on': step <= streak }"
+            />
+          </div>
+        </div>
+
+        <div class="mx-auto w-full max-w-md">
           <div
             class="
-              rounded-4xl border border-white/10 bg-white/5.5 p-1 shadow-2xl
-              shadow-black/25 backdrop-blur-xl
+              grid gap-6
+              sm:grid-cols-2 sm:gap-4
             "
           >
-            <div
-              class="
-                rounded-[1.8rem] border border-white/5 bg-slate-950/60 p-5
-                sm:p-8
-              "
-            >
-              <div class="flex flex-wrap items-center justify-between gap-4">
-                <p
-                  class="
-                    text-sm font-semibold tracking-[0.16em] text-slate-500
-                    uppercase
-                  "
-                >
-                  Aktuelle Kategorie
-                </p>
-                <div class="flex items-center gap-1.5" aria-label="Streak Fortschritt">
-                  <span
-                    v-for="step in 5" :key="step" class="
-                      size-2 rounded-full transition
-                    " :class="step <= streak ? `
-                      bg-violet-300 shadow-[0_0_10px] shadow-violet-300
-                    ` : `bg-white/15`"
-                  />
-                  <span class="ml-2 font-mono text-sm text-slate-400">{{ streak }}/5</span>
-                </div>
-              </div>
-
-              <div
-                class="
-                  mt-5 flex min-h-28 items-center justify-center rounded-3xl
-                  border border-violet-300/20 bg-linear-to-br from-violet-400/15
-                  via-sky-400/5 to-transparent px-5 text-center text-3xl
-                  font-black tracking-tight text-white shadow-inner
-                  shadow-white/5
-                  sm:text-4xl
-                "
+            <div class="grid gap-2 text-center">
+              <label for="my-association" class="text-sm text-muted">Du</label>
+              <input
+                id="my-association"
+                :value="myInput"
+                :disabled="inputLocked || !connected"
+                maxlength="120"
+                autocomplete="off"
+                placeholder="Deine Antwort"
+                class="field field-answer"
+                @input="handleInput"
               >
-                <span v-if="currentCategory">{{ currentCategory }}</span>
-                <span v-else class="text-base font-medium text-slate-500">Kategorie wird geladen …</span>
-              </div>
+            </div>
 
-              <div
-                class="
-                  mt-6 grid gap-4
-                  sm:grid-cols-2
-                "
-              >
-                <label class="block">
-                  <span class="mb-2 block text-sm font-medium text-slate-400">Deine Assoziation</span>
-                  <input
-                    :value="myInput"
-                    :disabled="inputLocked || !connected"
-                    maxlength="120"
-                    autocomplete="off"
-                    placeholder="Was fällt dir ein?"
-                    class="
-                      w-full rounded-2xl border border-white/10 bg-white/5 p-4
-                      text-lg font-semibold text-white transition outline-none
-                      placeholder:text-slate-600
-                      focus:border-sky-300/60 focus:bg-white/8 focus:ring-4
-                      focus:ring-sky-400/10
-                      disabled:cursor-not-allowed disabled:opacity-50
-                    "
-                    @input="handleInput"
-                  >
-                </label>
-                <label v-if="revealed" class="block">
-                  <span class="mb-2 block text-sm font-medium text-slate-400">Assoziation des Mitspielers</span>
-                  <input
-                    :value="partnerInput" readonly class="
-                      w-full rounded-2xl border border-emerald-300/20
-                      bg-emerald-300/8 p-4 text-lg font-semibold
-                      text-emerald-100 outline-none
-                    "
-                  >
-                </label>
+            <div class="grid gap-2 text-center">
+              <p class="text-sm text-muted">
+                Mitspieler
+              </p>
+              <Transition name="reveal" mode="out-in">
                 <div
-                  v-else class="
-                    hidden rounded-2xl border border-dashed border-white/10
-                    bg-white/2 p-4 text-sm/6 text-slate-500
-                    sm:block
-                  "
+                  v-if="revealed"
+                  class="answer-box"
+                  :class="{ 'answer-empty': !partnerInput }"
                 >
-                  <template v-if="partnerRevealed">
-                    Dein Mitspieler ist bereit. Klicke auf <span
-                      class="font-semibold text-slate-300"
-                    >Reveal</span>, damit ihr beide die Antworten aufdeckt.
-                  </template>
-                  <template v-else>
-                    Beide antworten geheim. Klicke auf <span
-                      class="font-semibold text-slate-300"
-                    >Reveal</span>, sobald du bereit bist.
-                  </template>
+                  {{ partnerInput || 'Keine Antwort' }}
                 </div>
-              </div>
+                <div v-else class="answer-hidden">
+                  {{ partnerRevealed ? 'Bereit zum Aufdecken' : 'Schreibt noch' }}
+                </div>
+              </Transition>
+            </div>
+          </div>
 
+          <div class="mt-8 flex flex-col items-center gap-3">
+            <template v-if="!revealed">
+              <button
+                type="button"
+                :disabled="!canReveal"
+                class="
+                  btn w-full btn-primary
+                  sm:w-auto sm:min-w-56
+                "
+                @click="handleReveal"
+              >
+                <Icon name="lucide:eye" aria-hidden="true" class="size-4" />
+                {{ revealSent ? 'Warte auf Mitspieler' : 'Aufdecken' }}
+              </button>
+            </template>
+            <template v-else>
               <div
                 class="
-                  mt-7 grid grid-cols-2 gap-3
-                  sm:grid-cols-4
+                  grid w-full grid-cols-2 gap-3
+                  sm:w-auto
                 "
               >
-                <button
-                  type="button" :disabled="!canReveal" class="
-                    rounded-2xl bg-white p-4 text-sm font-black tracking-wide
-                    text-slate-950 transition
-                    hover:bg-sky-200
-                    disabled:cursor-not-allowed disabled:opacity-35
-                  " @click="handleReveal"
-                >
-                  Reveal
-                </button>
                 <button
                   type="button" :disabled="!canResolve" class="
-                    rounded-2xl bg-emerald-300 p-4 text-sm font-black
-                    tracking-wide text-emerald-950 transition
-                    hover:bg-emerald-200
-                    disabled:cursor-not-allowed disabled:opacity-35
+                    btn btn-yes
+                    sm:min-w-40
                   " @click="handleCorrect"
                 >
+                  <Icon name="lucide:check" aria-hidden="true" class="size-4" />
                   Richtig
                 </button>
                 <button
                   type="button" :disabled="!canResolve" class="
-                    rounded-2xl bg-rose-300 p-4 text-sm font-black tracking-wide
-                    text-rose-950 transition
-                    hover:bg-rose-200
-                    disabled:cursor-not-allowed disabled:opacity-35
+                    btn btn-no
+                    sm:min-w-40
                   " @click="handleWrong"
                 >
+                  <Icon name="lucide:x" aria-hidden="true" class="size-4" />
                   Falsch
                 </button>
-                <button
-                  type="button" :disabled="!canResolve" class="
-                    rounded-2xl border border-white/15 bg-white/5 p-4 text-sm
-                    font-black tracking-wide text-white transition
-                    hover:bg-white/10
-                    disabled:cursor-not-allowed disabled:opacity-35
-                  " @click="nextCategory"
-                >
-                  Weiter
-                </button>
               </div>
-            </div>
+              <button
+                type="button" :disabled="!canResolve" class="btn btn-ghost" @click="nextCategory"
+              >
+                Ohne Wertung weiter
+              </button>
+            </template>
+            <p class="max-w-sm text-center text-sm/6 text-faint">
+              {{ revealStatus }}
+            </p>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
+
     <ToastStack :toasts="toasts" />
   </main>
 </template>

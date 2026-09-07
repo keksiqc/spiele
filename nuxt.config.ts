@@ -2,10 +2,11 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/fonts'],
+  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon'],
   devtools: { enabled: true },
 
   css: ['~/assets/css/main.css'],
+
   compatibilityDate: '2026-09-07',
 
   nitro: {
@@ -40,5 +41,23 @@ export default defineNuxtConfig({
       },
     },
 
+  },
+
+  fonts: {
+    families: [
+      {
+        name: 'Bricolage Grotesque',
+        provider: 'google',
+        weights: ['200 800'],
+        styles: ['normal'],
+      },
+    ],
+  },
+
+  icon: {
+    mode: 'svg',
+    serverBundle: {
+      collections: ['lucide'],
+    },
   },
 })
