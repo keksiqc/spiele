@@ -2,7 +2,7 @@
   "recommendations": [
     "antfu.vite",
     "antfu.iconify",
-    "antfu.unocss",
+    "bradlc.vscode-tailwindcss",
     "antfu.goto-alias",
     "vue.volar",
     "dbaeumer.vscode-eslint",
