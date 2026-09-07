@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { toast } from 'vue-sonner'
 import { localizeCategory } from '#shared/categories'
 import { MAX_ROOM_ID_LENGTH, normalizeRoomId } from '#shared/game'
-import ToastStack from '~/components/ToastStack.vue'
 import { useGameRoom } from '~/composables/useGameRoom'
-import { useToasts } from '~/composables/useToasts'
 
 const route = useRoute()
 const router = useRouter()
 const roomInput = ref('')
-const { notify, toasts } = useToasts()
 const { locale, t, te } = useI18n()
 
 const {
@@ -63,6 +61,12 @@ const connectionLabel = computed(() => {
   return t('game.connection.offline')
 })
 const categoryLabel = computed(() => localizeCategory(currentCategory.value, locale.value))
+
+type ToastTone = 'success' | 'error' | 'warning' | 'info'
+
+function notify(message: string, tone: ToastTone = 'info') {
+  toast[tone](message)
+}
 
 function createRoomId(): string {
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
@@ -433,7 +437,5 @@ useHead({
         </div>
       </section>
     </div>
-
-    <ToastStack :toasts="toasts" />
   </main>
 </template>

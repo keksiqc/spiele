@@ -20,7 +20,8 @@
     "postinstall": "nuxt prepare && lefthook install"
   },
   "dependencies": {
-    "nuxt": "^4.5.2"
+    "nuxt": "^4.5.2",
+    "vue-sonner": "^2.0.9"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.5.1",

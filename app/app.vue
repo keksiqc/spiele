@@ -8,5 +8,6 @@ useHead({ htmlAttrs: { lang: locale } })
   <div>
     <NuxtRouteAnnouncer />
     <NuxtPage />
+    <Toaster position="bottom-right" theme="dark" :offset="16" :duration="3600" />
   </div>
 </template>
