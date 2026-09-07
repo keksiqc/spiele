@@ -20,6 +20,7 @@
     "postinstall": "nuxt prepare && lefthook install"
   },
   "dependencies": {
+    "@vueuse/core": "^14.4.0",
     "nuxt": "^4.5.2",
     "vue-sonner": "^2.0.9"
   },
