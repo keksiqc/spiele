@@ -17,7 +17,4 @@ export default antfu({
       entryPoint: 'app/assets/css/main.css',
     },
   },
-  rules: {
-    'unicorn/filename-case': 'off',
-  },
 }).append(nuxt)
