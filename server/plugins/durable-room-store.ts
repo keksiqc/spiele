@@ -18,7 +18,7 @@ function activeRoomIds(durable: unknown): string[] {
     return []
 
   return context.getWebSockets().flatMap((socket) => {
-    const attachment = (socket as unknown as { deserializeAttachment?: () => unknown }).deserializeAttachment?.()
+    const attachment = (socket as WebSocket & { deserializeAttachment?: () => unknown }).deserializeAttachment?.()
     if (!attachment || typeof attachment !== 'object' || !('u' in attachment))
       return []
 

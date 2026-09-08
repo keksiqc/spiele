@@ -32,7 +32,7 @@ function peersInRoom(peer: RoomPeer, roomId: string): RoomPeer[] {
 function socketAttachment(peer: RoomPeer): SocketAttachment {
   // CrossWS exposes a Proxy as `peer.websocket` in the Durable Object adapter.
   // Cloudflare's attachment methods must be invoked on the original socket.
-  const socket = (peer as unknown as RoomPeerInternals)._internal?.ws ?? peer.websocket
+  const socket = (peer as RoomPeer & RoomPeerInternals)._internal?.ws ?? peer.websocket
   return socket as SocketAttachment
 }
 
