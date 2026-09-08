@@ -1,8 +1,9 @@
 import antfu from '@antfu/eslint-config'
 import tailwindcss from 'eslint-plugin-better-tailwindcss'
-import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default withNuxt(antfu({
+import nuxt from './.nuxt/eslint.config.mjs'
+
+export default antfu({
   formatters: true,
   vue: true,
   antislop: true,
@@ -15,4 +16,4 @@ export default withNuxt(antfu({
       entryPoint: 'app/assets/css/main.css',
     },
   },
-}))
+}).append(nuxt)
