@@ -8,9 +8,6 @@ export default antfu({
   antislop: true,
   typescript: true,
   vue: true,
-  unicorn: {
-    allRecommended: true,
-  },
 }, {
   extends: [
     tailwindcss.configs.recommended,
