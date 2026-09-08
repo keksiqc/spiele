@@ -3,6 +3,13 @@
     "*.css": "tailwindcss"
   },
 
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.nuxt": true,
+    "**/.output": true,
+    "**/.agents": true
+  },
+
   // Enable the ESlint flat config support
   "eslint.useFlatConfig": true,
 
