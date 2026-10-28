@@ -6,21 +6,21 @@
     "language": "Sprache"
   },
   "home": {
-    "title": "spiele.keksi.dev – kleine Spiele für zwei",
-    "description": "Spiele gemeinsam im Browser – aktuell mit dem Assoziationsspiel für zwei Personen.",
+    "title": "spiele.keksi.dev - kleine Spiele für zwei",
+    "description": "Spiele gemeinsam im Browser - aktuell mit dem Assoziationsspiel für zwei Personen.",
     "headline": "Kleine Spiele für zwei, direkt im Browser.",
     "intro": "Raum öffnen, Code teilen, losspielen. Ohne Download und ohne Anmeldung.",
     "players": "{count} Spieler"
   },
   "notFound": {
-    "title": "Seite nicht gefunden – spiele.keksi.dev",
+    "title": "Seite nicht gefunden - spiele.keksi.dev",
     "label": "Fehler 404",
     "headline": "Diese Seite gibt es nicht.",
     "text": "Der Link ist vielleicht veraltet. Auf der Startseite findest du alle Spiele."
   },
   "game": {
     "name": "Assoziationsspiel",
-    "title": "Assoziationsspiel – spiele.keksi.dev",
+    "title": "Assoziationsspiel - spiele.keksi.dev",
     "description": "Das Assoziationsspiel für zwei Personen im Browser.",
     "summary": "Eine Kategorie, zwei Antworten. Schreibt geheim, deckt gleichzeitig auf und baut eine Serie auf.",
     "lobby": {
@@ -61,7 +61,7 @@
       "secret": "Beide schreiben geheim. Aufgedeckt wird erst, wenn ihr beide bereit seid."
     },
     "toast": {
-      "connected": "Verbunden – viel Spaß!",
+      "connected": "Verbunden - viel Spaß!",
       "disconnected": "Die Verbindung wurde getrennt.",
       "correct": "Richtige Antwort!",
       "wrong": "Falsche Antwort!",

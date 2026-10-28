@@ -6,21 +6,21 @@
     "language": "Idioma"
   },
   "home": {
-    "title": "spiele.keksi.dev – pequeños juegos para dos",
-    "description": "Juega en pareja desde el navegador – por ahora con el juego de asociaciones para dos personas.",
+    "title": "spiele.keksi.dev - pequeños juegos para dos",
+    "description": "Juega en pareja desde el navegador - por ahora con el juego de asociaciones para dos personas.",
     "headline": "Pequeños juegos para dos, directamente en el navegador.",
     "intro": "Abre una sala, comparte el código y empieza a jugar. Sin descargas ni registro.",
     "players": "{count} jugadores"
   },
   "notFound": {
-    "title": "Página no encontrada – spiele.keksi.dev",
+    "title": "Página no encontrada - spiele.keksi.dev",
     "label": "Error 404",
     "headline": "Esta página no existe.",
     "text": "Puede que el enlace esté obsoleto. Encontrarás todos los juegos en la página de inicio."
   },
   "game": {
     "name": "Juego de asociaciones",
-    "title": "Juego de asociaciones – spiele.keksi.dev",
+    "title": "Juego de asociaciones - spiele.keksi.dev",
     "description": "El juego de asociaciones para dos personas en el navegador.",
     "summary": "Una categoría, dos respuestas. Escribid en secreto, revelad a la vez y construid una racha.",
     "lobby": {
@@ -61,7 +61,7 @@
       "secret": "Ambos escribís en secreto. Las respuestas se revelan solo cuando los dos estéis listos."
     },
     "toast": {
-      "connected": "Conectado – ¡a divertirse!",
+      "connected": "Conectado - ¡a divertirse!",
       "disconnected": "Se perdió la conexión.",
       "correct": "¡Respuesta correcta!",
       "wrong": "¡Respuesta incorrecta!",

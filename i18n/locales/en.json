@@ -6,21 +6,21 @@
     "language": "Language"
   },
   "home": {
-    "title": "spiele.keksi.dev – small games for two",
-    "description": "Play together in the browser – currently with the association game for two people.",
+    "title": "spiele.keksi.dev - small games for two",
+    "description": "Play together in the browser - currently with the association game for two people.",
     "headline": "Small games for two, right in the browser.",
     "intro": "Open a room, share the code, start playing. No download and no sign-up.",
     "players": "{count} players"
   },
   "notFound": {
-    "title": "Page not found – spiele.keksi.dev",
+    "title": "Page not found - spiele.keksi.dev",
     "label": "Error 404",
     "headline": "This page does not exist.",
     "text": "The link may be out of date. You can find all games on the home page."
   },
   "game": {
     "name": "Association game",
-    "title": "Association game – spiele.keksi.dev",
+    "title": "Association game - spiele.keksi.dev",
     "description": "The association game for two people in the browser.",
     "summary": "One category, two answers. Write in secret, reveal at the same time and build a streak.",
     "lobby": {
@@ -61,7 +61,7 @@
       "secret": "Both of you write in secret. Answers are revealed only when you are both ready."
     },
     "toast": {
-      "connected": "Connected – have fun!",
+      "connected": "Connected - have fun!",
       "disconnected": "The connection was lost.",
       "correct": "Correct answer!",
       "wrong": "Wrong answer!",
