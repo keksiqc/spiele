@@ -1,16 +1,15 @@
 ---
 name: vite
 description: Vite build tool configuration, plugin API, SSR, and Vite 8 Rolldown migration. Use when working with Vite projects, vite.config.ts, Vite plugins, or building libraries/SSR apps with Vite.
-license: MIT
 metadata:
   author: Anthony Fu
-  version: "2026.1.31"
+  version: "2026.9.25"
   source: Generated from https://github.com/vitejs/vite, scripts at https://github.com/antfu/skills
 ---
 
 # Vite
 
-> Based on Vite 8 beta (Rolldown-powered). Vite 8 uses Rolldown bundler and Oxc transformer.
+> Based on Vite v8.3.1 (Rolldown-powered), generated at 2026-09-25. Vite 8 uses the Rolldown bundler and the Oxc transformer instead of esbuild + Rollup.
 
 Vite is a next-generation frontend build tool with fast dev server (native ESM + HMR) and optimized production builds.
 
@@ -71,9 +70,3 @@ export default defineConfig({
 - `@vitejs/plugin-react` - React with Oxc/Babel
 - `@vitejs/plugin-react-swc` - React with SWC
 - `@vitejs/plugin-legacy` - Legacy browser support
-
-## Cross-Skill References
-
-- **Testing** → Use `vitest` skill (Vite-native testing)
-- **Vue projects** → Use `vue` skill for component patterns
-- **Library bundling** → Use `tsdown` skill for TypeScript libs
