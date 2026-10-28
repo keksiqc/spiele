@@ -1,20 +1,27 @@
+minimumReleaseAge: 0
 minimumReleaseAgeExcludePrune: true
-minimumReleaseAgeExclude:
-  - '@iconify-json/lucide@1.2.148'
-  - '@x18n/builtins@0.1.2'
-  - '@x18n/cli@0.1.2'
-  - '@x18n/core@0.1.2'
-  - '@x18n/node@0.1.2'
-  - '@x18n/ui@0.1.2'
-  - miniflare@5.20261023.1-beta
-  - wrangler@4.154.0
 
 trustPolicy: no-downgrade
+trustPolicyExclude:
+  - seroval@1.7.2
+  - semver@6.3.1
+
+update:
+  ignoreDeps:
+    - typescript@7
+
+autoInstallPeers: false
+strictPeerDependencies: false
+shamefullyHoist: true
 shellEmulator: true
 
 allowBuilds:
   esbuild: true
-  lefthook: true
   nuxt-i18n-micro: true
+  simple-git-hooks: true
   unrs-resolver: true
   workerd: true
+
+permissions:
+  '@x18n/cli':
+    skills: false
