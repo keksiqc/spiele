@@ -17,10 +17,11 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest run",
-    "postinstall": "nuxt prepare && lefthook install"
+    "postinstall": "nuxt prepare && lefthook install && skills experimental_sync"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^10.0.0",
+    "@antfu/skills": "^0.1.2",
     "@iconify-json/lucide": "^1.2.148",
     "@nuxt/eslint": "^1.17.0",
     "@nuxt/fonts": "^1.2.0",
@@ -35,6 +36,7 @@
     "eslint-plugin-sonarjs": "^4.2.2",
     "lefthook": "^2.2.2",
     "nuxt": "^4.6.3",
+    "skills": "^1.7.4",
     "tailwindcss": "^4.3.3",
     "typescript": "6.0.3",
     "vitest": "^5.0.5",
