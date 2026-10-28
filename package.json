@@ -16,8 +16,9 @@
     "cf-typegen": "wrangler types",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "i18n:check": "x18n check",
     "test": "vitest run",
-    "postinstall": "nuxt prepare && lefthook install && skills experimental_sync -a universal"
+    "postinstall": "nuxt prepare && lefthook install && skills experimental_sync -a universal -y"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^10.0.0",
@@ -29,6 +30,7 @@
     "@nuxtjs/i18n": "^10.6.0",
     "@tailwindcss/vite": "^4.3.3",
     "@vueuse/core": "^15.0.0",
+    "@x18n/cli": "^0.1.1",
     "eslint": "^10.13.0",
     "eslint-plugin-better-tailwindcss": "^4.10.0",
     "eslint-plugin-format": "^2.0.1",

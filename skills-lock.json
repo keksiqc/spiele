@@ -5,7 +5,8 @@
       "source": "vercel-labs/agent-browser",
       "sourceType": "github",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "computedHash": "80161e6836b3b40f4e83730a290deb40ac14d877d38c97ad5f6d71be37ce74c3"
+      "computedHash": "80161e6836b3b40f4e83730a290deb40ac14d877d38c97ad5f6d71be37ce74c3",
+      "via": "@antfu/skills"
     },
     "antfu": {
       "source": "antfu/skills",
@@ -72,7 +73,8 @@
       "source": "anthropics/skills",
       "sourceType": "github",
       "skillPath": "skills/frontend-design/SKILL.md",
-      "computedHash": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576"
+      "computedHash": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576",
+      "via": "@antfu/skills"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -241,6 +243,27 @@
       "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
       "computedHash": "95da47fc97af998e85b7d7e6d57b3ac76727c1e290cfe9ea09005aacb826959f",
       "via": "@antfu/skills"
+    },
+    "x18n": {
+      "source": "@x18n/cli",
+      "sourceType": "node_modules",
+      "skillPath": "skills/x18n/SKILL.md",
+      "version": "0.1.1",
+      "computedHash": "581e6bbecfd95ad3198dc6eb6f0a25eb346ab5b12ab0efa0a4e78623014133cb"
+    },
+    "x18n-check": {
+      "source": "@x18n/cli",
+      "sourceType": "node_modules",
+      "skillPath": "skills/x18n-check/SKILL.md",
+      "version": "0.1.1",
+      "computedHash": "31aa0847f99dd3768111de9e9960bf364c72e9f9c9a0d2b449b57c2b52c9f4c0"
+    },
+    "x18n-setup": {
+      "source": "@x18n/cli",
+      "sourceType": "node_modules",
+      "skillPath": "skills/x18n-setup/SKILL.md",
+      "version": "0.1.1",
+      "computedHash": "654a86b8a1b26b71a035deeca295d08b43f194dd49bb9bedc05392d477f8adb3"
     }
   }
 }
