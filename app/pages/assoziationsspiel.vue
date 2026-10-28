@@ -10,7 +10,8 @@ import { useGameRoom } from '~/composables/useGameRoom'
 const route = useRoute()
 const router = useRouter()
 const roomInput = ref('')
-const { locale, t, te } = useI18n()
+const { locale } = useI18nLocale()
+const { $ts, $has: has } = useI18n()
 
 const {
   connected,
@@ -29,18 +30,18 @@ const {
   updateInput,
   join,
 } = useGameRoom({
-  onConnected: () => notify(t('game.toast.connected'), 'success'),
-  onDisconnected: () => notify(t('game.toast.disconnected'), 'error'),
-  onError: key => notify(te(key)
-    ? t(key)
+  onConnected: () => notify($ts('game.toast.connected'), 'success'),
+  onDisconnected: () => notify($ts('game.toast.disconnected'), 'error'),
+  onError: key => notify(has(key)
+    ? $ts(key)
     : key, 'error'),
   onMessage: (message) => {
     if (message.type === 'streak')
-      notify(t('game.toast.correct'), 'success')
+      notify($ts('game.toast.correct'), 'success')
     if (message.type === 'resetStreak')
-      notify(t('game.toast.wrong'), 'error')
+      notify($ts('game.toast.wrong'), 'error')
     if (message.type === 'allRevealed')
-      notify(t('game.toast.revealed'), 'info')
+      notify($ts('game.toast.revealed'), 'info')
   },
 })
 
@@ -49,21 +50,21 @@ const canReveal = computed(() => connected.value && !inputLocked.value)
 const canResolve = computed(() => connected.value && revealed.value)
 const revealStatus = computed(() => {
   if (revealed.value)
-    return t('game.status.revealed')
+    return $ts('game.status.revealed')
   if (revealSent.value)
-    return t('game.status.sent')
+    return $ts('game.status.sent')
   if (partnerRevealed.value)
-    return t('game.status.partnerReady')
-  return t('game.status.secret')
+    return $ts('game.status.partnerReady')
+  return $ts('game.status.secret')
 })
 const connectionLabel = computed(() => {
   if (connected.value)
-    return t('game.connection.connected')
+    return $ts('game.connection.connected')
   if (connecting.value)
-    return t('game.connection.connecting')
-  return t('game.connection.offline')
+    return $ts('game.connection.connecting')
+  return $ts('game.connection.offline')
 })
-const categoryLabel = computed(() => localizeCategory(currentCategory.value, locale.value))
+const categoryLabel = computed(() => localizeCategory(currentCategory.value, locale.value ?? 'de'))
 const { copy: copyToClipboard, isSupported: clipboardSupported } = useClipboard()
 
 type ToastTone = 'success' | 'error' | 'warning' | 'info'
@@ -97,7 +98,7 @@ function normalizeRoomInput() {
 function joinRoom(value: unknown = roomInput.value) {
   const normalized = normalizeRoomId(value)
   if (!normalized) {
-    notify(t('game.toast.invalidCode'), 'warning')
+    notify($ts('game.toast.invalidCode'), 'warning')
     return
   }
 
@@ -141,7 +142,7 @@ function handleCorrect() {
     return
 
   streak.value = nextStreak
-  notify(t('game.toast.correct'), 'success')
+  notify($ts('game.toast.correct'), 'success')
   nextCategory()
 }
 
@@ -152,13 +153,13 @@ function handleWrong() {
     return
 
   streak.value = 0
-  notify(t('game.toast.wrong'), 'error')
+  notify($ts('game.toast.wrong'), 'error')
   nextCategory()
 }
 
 function nextCategory() {
   if (!send({ type: 'newCategory' }))
-    notify(t('game.toast.notReady'), 'warning')
+    notify($ts('game.toast.notReady'), 'warning')
 }
 
 async function copyRoomId() {
@@ -166,16 +167,16 @@ async function copyRoomId() {
     return
 
   if (!clipboardSupported.value) {
-    notify(t('game.toast.copyFailed'), 'warning')
+    notify($ts('game.toast.copyFailed'), 'warning')
     return
   }
 
   try {
     await copyToClipboard(roomId.value)
-    notify(t('game.toast.copied'), 'success')
+    notify($ts('game.toast.copied'), 'success')
   }
   catch {
-    notify(t('game.toast.copyFailed'), 'warning')
+    notify($ts('game.toast.copyFailed'), 'warning')
   }
 }
 
@@ -186,7 +187,7 @@ onMounted(() => {
 
   const normalized = normalizeRoomId(queryRoom)
   if (!normalized) {
-    notify(t('game.toast.invalidUrlCode'), 'warning')
+    notify($ts('game.toast.invalidUrlCode'), 'warning')
     void router.replace({ query: {} })
     return
   }
@@ -196,11 +197,11 @@ onMounted(() => {
 })
 
 useHead({
-  title: () => t('game.title'),
+  title: () => $ts('game.title'),
   meta: [
     {
       name: 'description',
-      content: () => t('game.description'),
+      content: () => $ts('game.description'),
     },
   ],
 })
@@ -221,11 +222,11 @@ useHead({
             hidden text-muted
             sm:inline
           "
-        >{{ t('game.room') }}</span>
+        >{{ $ts('game.room') }}</span>
         <span class="font-semibold tracking-[0.12em]">{{ roomId }}</span>
         <button
           type="button"
-          :aria-label="t('game.copyCode')"
+          :aria-label="$ts('game.copyCode')"
           class="
             grid size-8 place-items-center rounded-md text-muted
             transition-colors
@@ -257,15 +258,15 @@ useHead({
             sm:text-5xl
           "
         >
-          {{ t('game.lobby.headline') }}
+          {{ $ts('game.lobby.headline') }}
         </h1>
         <p class="mt-5 text-lg/8 text-muted">
-          {{ t('game.lobby.intro') }}
+          {{ $ts('game.lobby.intro') }}
         </p>
 
         <form class="mt-10" @submit.prevent="joinRoom()">
           <label for="room-id" class="block text-sm text-muted">
-            {{ t('game.lobby.codeLabel') }}
+            {{ $ts('game.lobby.codeLabel') }}
           </label>
           <input
             id="room-id"
@@ -274,7 +275,7 @@ useHead({
             autocomplete="off"
             inputmode="text"
             spellcheck="false"
-            :placeholder="t('game.lobby.codePlaceholder')"
+            :placeholder="$ts('game.lobby.codePlaceholder')"
             class="mt-2 field field-code"
             @input="normalizeRoomInput"
           >
@@ -287,16 +288,16 @@ useHead({
             <button
               type="submit" :disabled="!roomInput" class="btn btn-primary"
             >
-              {{ t('game.lobby.join') }}
+              {{ $ts('game.lobby.join') }}
             </button>
             <button type="button" class="btn btn-secondary" @click="createRoom">
-              {{ t('game.lobby.create') }}
+              {{ $ts('game.lobby.create') }}
             </button>
           </div>
         </form>
 
         <p class="mt-8 text-sm/6 text-faint">
-          {{ t('game.lobby.privacy') }}
+          {{ $ts('game.lobby.privacy') }}
         </p>
       </section>
 
@@ -321,7 +322,7 @@ useHead({
             {{ connectionLabel }}
           </span>
           <button type="button" class="btn btn-ghost" @click="leaveRoom">
-            {{ t('game.leave') }}
+            {{ $ts('game.leave') }}
           </button>
         </div>
 
@@ -332,19 +333,19 @@ useHead({
           "
         >
           <p class="text-sm text-muted">
-            {{ t('game.prompt') }}
+            {{ $ts('game.prompt') }}
           </p>
           <h1
             class="category-word mt-3"
             :class="{ 'category-word-long': categoryLabel.length > 13 }"
           >
             <span v-if="currentCategory">{{ categoryLabel }}</span>
-            <span v-else class="category-placeholder">{{ t('game.loadingCategory') }}</span>
+            <span v-else class="category-placeholder">{{ $ts('game.loadingCategory') }}</span>
           </h1>
           <div
             class="mt-7 inline-flex items-center justify-center gap-1.5"
             role="img"
-            :aria-label="t('game.streak', { count: streak })"
+            :aria-label="$ts('game.streak', { count: streak })"
           >
             <span
               v-for="step in 5"
@@ -363,14 +364,14 @@ useHead({
             "
           >
             <div class="grid gap-2 text-center">
-              <label for="my-association" class="text-sm text-muted">{{ t('game.you') }}</label>
+              <label for="my-association" class="text-sm text-muted">{{ $ts('game.you') }}</label>
               <input
                 id="my-association"
                 :value="myInput"
                 :disabled="inputLocked || !connected"
                 maxlength="120"
                 autocomplete="off"
-                :placeholder="t('game.answerPlaceholder')"
+                :placeholder="$ts('game.answerPlaceholder')"
                 class="field field-answer"
                 @input="handleInput"
               >
@@ -378,7 +379,7 @@ useHead({
 
             <div class="grid gap-2 text-center">
               <p class="text-sm text-muted">
-                {{ t('game.partner') }}
+                {{ $ts('game.partner') }}
               </p>
               <Transition name="reveal" mode="out-in">
                 <div
@@ -386,10 +387,10 @@ useHead({
                   class="answer-box"
                   :class="{ 'answer-empty': !partnerInput }"
                 >
-                  {{ partnerInput || t('game.noAnswer') }}
+                  {{ partnerInput || $ts('game.noAnswer') }}
                 </div>
                 <div v-else class="answer-hidden">
-                  {{ partnerRevealed ? t('game.partnerReady') : t('game.partnerWriting') }}
+                  {{ partnerRevealed ? $ts('game.partnerReady') : $ts('game.partnerWriting') }}
                 </div>
               </Transition>
             </div>
@@ -407,7 +408,7 @@ useHead({
                 @click="handleReveal"
               >
                 <Icon name="lucide:eye" aria-hidden="true" class="size-4" />
-                {{ revealSent ? t('game.waitingForPartner') : t('game.reveal') }}
+                {{ revealSent ? $ts('game.waitingForPartner') : $ts('game.reveal') }}
               </button>
             </template>
             <template v-else>
@@ -424,7 +425,7 @@ useHead({
                   " @click="handleCorrect"
                 >
                   <Icon name="lucide:check" aria-hidden="true" class="size-4" />
-                  {{ t('game.correct') }}
+                  {{ $ts('game.correct') }}
                 </button>
                 <button
                   type="button" :disabled="!canResolve" class="
@@ -433,13 +434,13 @@ useHead({
                   " @click="handleWrong"
                 >
                   <Icon name="lucide:x" aria-hidden="true" class="size-4" />
-                  {{ t('game.wrong') }}
+                  {{ $ts('game.wrong') }}
                 </button>
               </div>
               <button
                 type="button" :disabled="!canResolve" class="btn btn-ghost" @click="nextCategory"
               >
-                {{ t('game.skip') }}
+                {{ $ts('game.skip') }}
               </button>
             </template>
             <p class="max-w-sm text-center text-sm/6 text-faint">

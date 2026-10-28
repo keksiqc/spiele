@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/icon',
-    '@nuxtjs/i18n',
+    'nuxt-i18n-micro',
     'vue-sonner/nuxt',
   ],
   devtools: { enabled: true },
@@ -62,25 +62,26 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'de',
     strategy: 'no_prefix',
+    translationDir: 'i18n/locales',
+    translationPayloads: { mode: 'source' },
+    disablePageLocales: true,
+    meta: true,
+    localeCookie: 'lang',
+    autoDetectLanguage: true,
     locales: [
       {
         code: 'de',
-        language: 'de-DE',
-        name: 'Deutsch',
-        file: 'de.json',
+        iso: 'de-DE',
+        dir: 'ltr',
+        displayName: 'Deutsch',
       },
       {
         code: 'en',
-        language: 'en-US',
-        name: 'English',
-        file: 'en.json',
+        iso: 'en-US',
+        dir: 'ltr',
+        displayName: 'English',
       },
     ],
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'lang',
-      fallbackLocale: 'de',
-    },
   },
 
   icon: {

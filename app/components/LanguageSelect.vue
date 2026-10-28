@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { onClickOutside } from '@vueuse/core'
 
-const { locale, locales, setLocale, t } = useI18n()
+const { locale } = useI18nLocale()
+const { getLocales, switchLocale, $ts } = useI18n()
+const locales = computed(() => getLocales())
 
-type LocaleCode = typeof locale.value
+type LocaleCode = string
 
 const open = ref(false)
 const root = ref<HTMLElement | null>(null)
@@ -36,7 +38,7 @@ async function focusOption(index: number) {
 }
 
 function choose(code: LocaleCode) {
-  void setLocale(code)
+  void switchLocale(code)
   close(true)
 }
 
@@ -90,7 +92,7 @@ function onOptionKeydown(event: KeyboardEvent, index: number, code: LocaleCode) 
       ref="trigger"
       type="button"
       class="btn btn-ghost"
-      :aria-label="t('site.language')"
+      :aria-label="$ts('site.language')"
       :aria-expanded="open"
       aria-haspopup="listbox"
       @click="toggle"
@@ -102,7 +104,7 @@ function onOptionKeydown(event: KeyboardEvent, index: number, code: LocaleCode) 
           hidden
           sm:inline
         "
-      >{{ current?.name }}</span>
+      >{{ current?.displayName }}</span>
       <span
         class="
           uppercase
@@ -121,7 +123,7 @@ function onOptionKeydown(event: KeyboardEvent, index: number, code: LocaleCode) 
       <ul
         v-if="open"
         role="listbox"
-        :aria-label="t('site.language')"
+        :aria-label="$ts('site.language')"
         class="lang-menu"
       >
         <li
@@ -136,7 +138,7 @@ function onOptionKeydown(event: KeyboardEvent, index: number, code: LocaleCode) 
           @click="choose(item.code)"
           @keydown="onOptionKeydown($event, index, item.code)"
         >
-          <span>{{ item.name }}</span>
+          <span>{{ item.displayName }}</span>
           <Icon
             v-if="item.code === locale"
             name="lucide:check"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $ts } = useI18n()
 </script>
 
 <template>
@@ -29,7 +29,7 @@ const { t } = useI18n()
           hidden
           sm:inline
         "
-      >{{ t('site.name') }}</span>
+      >{{ $ts('site.name') }}</span>
     </NuxtLink>
 
     <div class="flex items-center gap-2">

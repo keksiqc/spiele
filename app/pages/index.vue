@@ -1,21 +1,21 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $ts } = useI18n()
 
 const games = computed(() => [
   {
-    title: t('game.name'),
-    description: t('game.summary'),
-    playerCount: t('home.players', { count: 2 }),
+    title: $ts('game.name'),
+    description: $ts('game.summary'),
+    playerCount: $ts('home.players', { count: 2 }),
     route: '/assoziationsspiel',
   },
 ])
 
 useHead({
-  title: () => t('home.title'),
+  title: () => $ts('home.title'),
   meta: [
     {
       name: 'description',
-      content: () => t('home.description'),
+      content: () => $ts('home.description'),
     },
   ],
 })
@@ -37,10 +37,10 @@ useHead({
           sm:text-5xl
         "
       >
-        {{ t('home.headline') }}
+        {{ $ts('home.headline') }}
       </h1>
       <p class="mt-5 max-w-lg text-lg/8 text-muted">
-        {{ t('home.intro') }}
+        {{ $ts('home.intro') }}
       </p>
 
       <ul class="mt-14 divide-y divide-line border-y border-line">

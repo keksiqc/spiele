@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $ts } = useI18n()
 
 useHead({
-  title: () => t('notFound.title'),
+  title: () => $ts('notFound.title'),
 })
 </script>
 
@@ -17,7 +17,7 @@ useHead({
       "
     >
       <p class="text-sm text-muted">
-        {{ t('notFound.label') }}
+        {{ $ts('notFound.label') }}
       </p>
       <h1
         class="
@@ -25,14 +25,14 @@ useHead({
           sm:text-5xl
         "
       >
-        {{ t('notFound.headline') }}
+        {{ $ts('notFound.headline') }}
       </h1>
       <p class="mt-4 max-w-md text-lg/8 text-muted">
-        {{ t('notFound.text') }}
+        {{ $ts('notFound.text') }}
       </p>
       <div class="mt-8">
         <NuxtLink to="/" class="btn btn-secondary">
-          {{ t('site.home') }}
+          {{ $ts('site.home') }}
         </NuxtLink>
       </div>
     </div>

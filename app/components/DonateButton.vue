@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $ts } = useI18n()
 </script>
 
 <template>
@@ -7,7 +7,7 @@ const { t } = useI18n()
     href="https://ko-fi.com/keksiqc"
     target="_blank"
     rel="noreferrer"
-    :aria-label="t('site.donate')"
+    :aria-label="$ts('site.donate')"
     class="btn btn-ghost"
   >
     <Icon name="lucide:heart" aria-hidden="true" class="size-4" />
@@ -16,6 +16,6 @@ const { t } = useI18n()
         hidden
         sm:inline
       "
-    >{{ t('site.donate') }}</span>
+    >{{ $ts('site.donate') }}</span>
   </a>
 </template>
