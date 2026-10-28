@@ -26,22 +26,20 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
-          bun-version: 1.4.4
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
+          runtime: node@26
+          cache: true
 
       - name: Run ESLint
-        run: bun run lint
+        run: pnpm run lint
 
       - name: Run typecheck
-        run: bun run typecheck
+        run: pnpm run typecheck
 
       - name: Run tests
-        run: bun run test
+        run: pnpm run test
 
       - name: Test Cloudflare rooms
-        run: bun run test:integration
+        run: pnpm run test:integration

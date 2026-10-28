@@ -11,13 +11,13 @@ Category history, membership, reveal status, and streak survive hibernation. Bot
 Install dependencies with Bun:
 
 ```bash
-bun install
+pnpm i
 ```
 
 Start the game in the local Cloudflare runtime:
 
 ```bash
-bun run dev
+pnpm run dev
 ```
 
 This command builds Nuxt and starts Wrangler, usually at `http://localhost:8787`. It uses local Durable Objects and storage. It does not connect to production rooms.
@@ -25,25 +25,25 @@ This command builds Nuxt and starts Wrangler, usually at `http://localhost:8787`
 This workflow serves a production build without hot reload. After editing the source, rebuild Nuxt in another terminal:
 
 ```bash
-bun run build
+pnpm run build
 ```
 
-Wrangler reloads the changed build. To preview an existing build, run `bun run preview`.
+Wrangler reloads the changed build. To preview an existing build, run `pnpm run preview`.
 
 ## Verification
 
 Run the source checks and unit tests:
 
 ```bash
-bun run lint
-bun run typecheck
-bun run test
+pnpm run lint
+pnpm run typecheck
+pnpm run test
 ```
 
 Run the game against the local Cloudflare runtime:
 
 ```bash
-bun run test:integration
+pnpm run test:integration
 ```
 
 This command builds Nuxt and uses the simulator included with Wrangler. Tests cover room isolation, capacity, reveal coordination, disconnects, validation, and recovery after forced hibernation.
@@ -53,8 +53,8 @@ This command builds Nuxt and uses the simulator included with Wrangler. Tests co
 Sign in to Cloudflare and deploy:
 
 ```bash
-bunx wrangler login
-bun run deploy
+pnpx wrangler login
+pnpm run deploy
 ```
 
 The configuration in `wrangler.jsonc` binds `GAME_ROOMS` to `GameRoom` and creates its SQLite-backed namespace. The Worker entry routes `/ws` to the object for the normalized room code. Nitro handles the other requests, and Cloudflare serves the static assets.
@@ -62,8 +62,8 @@ The configuration in `wrangler.jsonc` binds `GAME_ROOMS` to `GameRoom` and creat
 To validate the deployment bundle without publishing it, run:
 
 ```bash
-bun run build
-bunx wrangler deploy --dry-run
+pnpm run build
+pnpx wrangler deploy --dry-run
 ```
 
-After changing Cloudflare bindings, regenerate the types with `bun run cf:types`. The install preparation step also generates these types.
+After changing Cloudflare bindings, regenerate the types with `pnpm run cf:types`. The install preparation step also generates these types.

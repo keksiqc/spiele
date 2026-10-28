@@ -2,5 +2,5 @@ pre-commit:
   parallel: true
   jobs:
     - name: lint
-      run: bunx eslint --fix {staged_files}
+      run: pnpx eslint --fix {staged_files}
       stage_fixed: true

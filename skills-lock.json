@@ -121,7 +121,7 @@
       "source": "onmax/nuxt-skills",
       "sourceType": "github",
       "skillPath": "skills/nuxt-modules/SKILL.md",
-      "computedHash": "345723205187de04be0b0c349f7b17d319911dcda032d4f71595eb21ffff1ab7",
+      "computedHash": "ead7dc649bfad33dbd345983c0ae7ae9c0ff46038e1cc158872bd9b9601b60e4",
       "via": "@antfu/skills"
     },
     "research": {
