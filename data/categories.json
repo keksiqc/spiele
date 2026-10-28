@@ -2,603 +2,753 @@
   "categories": [
     {
       "de": "Tiere",
-      "en": "Animals"
+      "en": "Animals",
+      "es": "Animales"
     },
     {
       "de": "Städte",
-      "en": "Cities"
+      "en": "Cities",
+      "es": "Ciudades"
     },
     {
       "de": "Länder",
-      "en": "Countries"
+      "en": "Countries",
+      "es": "Países"
     },
     {
       "de": "Berufe",
-      "en": "Professions"
+      "en": "Professions",
+      "es": "Profesiones"
     },
     {
       "de": "Sportarten",
-      "en": "Sports"
+      "en": "Sports",
+      "es": "Deportes"
     },
     {
       "de": "Farben",
-      "en": "Colors"
+      "en": "Colors",
+      "es": "Colores"
     },
     {
       "de": "Essen",
-      "en": "Food"
+      "en": "Food",
+      "es": "Comida"
     },
     {
       "de": "Getränke",
-      "en": "Drinks"
+      "en": "Drinks",
+      "es": "Bebidas"
     },
     {
       "de": "Musikinstrumente",
-      "en": "Musical instruments"
+      "en": "Musical instruments",
+      "es": "Instrumentos musicales"
     },
     {
       "de": "Fahrzeuge",
-      "en": "Vehicles"
+      "en": "Vehicles",
+      "es": "Vehículos"
     },
     {
       "de": "Pflanzen",
-      "en": "Plants"
+      "en": "Plants",
+      "es": "Plantas"
     },
     {
       "de": "Filme",
-      "en": "Movies"
+      "en": "Movies",
+      "es": "Películas"
     },
     {
       "de": "Bücher",
-      "en": "Books"
+      "en": "Books",
+      "es": "Libros"
     },
     {
       "de": "Berühmte Personen",
-      "en": "Famous people"
+      "en": "Famous people",
+      "es": "Personajes famosos"
     },
     {
       "de": "Technologie",
-      "en": "Technology"
+      "en": "Technology",
+      "es": "Tecnología"
     },
     {
       "de": "Kleidung",
-      "en": "Clothing"
+      "en": "Clothing",
+      "es": "Ropa"
     },
     {
       "de": "Möbel",
-      "en": "Furniture"
+      "en": "Furniture",
+      "es": "Muebles"
     },
     {
       "de": "Werkzeuge",
-      "en": "Tools"
+      "en": "Tools",
+      "es": "Herramientas"
     },
     {
       "de": "Hobbys",
-      "en": "Hobbies"
+      "en": "Hobbies",
+      "es": "Aficiones"
     },
     {
       "de": "Wetterphänomene",
-      "en": "Weather phenomena"
+      "en": "Weather phenomena",
+      "es": "Fenómenos meteorológicos"
     },
     {
       "de": "Körperteile",
-      "en": "Body parts"
+      "en": "Body parts",
+      "es": "Partes del cuerpo"
     },
     {
       "de": "Sprachen",
-      "en": "Languages"
+      "en": "Languages",
+      "es": "Idiomas"
     },
     {
       "de": "Flüsse",
-      "en": "Rivers"
+      "en": "Rivers",
+      "es": "Ríos"
     },
     {
       "de": "Berge",
-      "en": "Mountains"
+      "en": "Mountains",
+      "es": "Montañas"
     },
     {
       "de": "Schulfächer",
-      "en": "School subjects"
+      "en": "School subjects",
+      "es": "Asignaturas escolares"
     },
     {
       "de": "Serie",
-      "en": "TV series"
+      "en": "TV series",
+      "es": "Series de televisión"
     },
     {
       "de": "Form",
-      "en": "Shapes"
+      "en": "Shapes",
+      "es": "Formas"
     },
     {
       "de": "Genre",
-      "en": "Genres"
+      "en": "Genres",
+      "es": "Géneros"
     },
     {
       "de": "Sehenswürdigkeit",
-      "en": "Landmarks"
+      "en": "Landmarks",
+      "es": "Lugares de interés"
     },
     {
       "de": "Spiel",
-      "en": "Games"
+      "en": "Games",
+      "es": "Juegos"
     },
     {
       "de": "Superheld",
-      "en": "Superheroes"
+      "en": "Superheroes",
+      "es": "Superhéroes"
     },
     {
       "de": "Superschurke",
-      "en": "Supervillains"
+      "en": "Supervillains",
+      "es": "Supervillanos"
     },
     {
       "de": "Biom",
-      "en": "Biomes"
+      "en": "Biomes",
+      "es": "Biomas"
     },
     {
       "de": "Marke",
-      "en": "Brands"
+      "en": "Brands",
+      "es": "Marcas"
     },
     {
       "de": "Gewürz",
-      "en": "Spices"
+      "en": "Spices",
+      "es": "Especias"
     },
     {
       "de": "Süßigkeit",
-      "en": "Sweets"
+      "en": "Sweets",
+      "es": "Dulces"
     },
     {
       "de": "Jahreszeit",
-      "en": "Seasons"
+      "en": "Seasons",
+      "es": "Estaciones del año"
     },
     {
       "de": "Küche",
-      "en": "Cuisines"
+      "en": "Cuisines",
+      "es": "Cocinas del mundo"
     },
     {
       "de": "Kontinent",
-      "en": "Continents"
+      "en": "Continents",
+      "es": "Continentes"
     },
     {
       "de": "Emotion",
-      "en": "Emotions"
+      "en": "Emotions",
+      "es": "Emociones"
     },
     {
       "de": "Erfindungen",
-      "en": "Inventions"
+      "en": "Inventions",
+      "es": "Inventos"
     },
     {
       "de": "Musikgenres",
-      "en": "Music genres"
+      "en": "Music genres",
+      "es": "Géneros musicales"
     },
     {
       "de": "Tanzstile",
-      "en": "Dance styles"
+      "en": "Dance styles",
+      "es": "Estilos de baile"
     },
     {
       "de": "Krankheiten",
-      "en": "Diseases"
+      "en": "Diseases",
+      "es": "Enfermedades"
     },
     {
       "de": "Wissenschaftlich",
-      "en": "Scientific"
+      "en": "Scientific",
+      "es": "Científico"
     },
     {
       "de": "Mythologische Wesen",
-      "en": "Mythical creatures"
+      "en": "Mythical creatures",
+      "es": "Criaturas mitológicas"
     },
     {
       "de": "Historische Ereignisse",
-      "en": "Historical events"
+      "en": "Historical events",
+      "es": "Acontecimientos históricos"
     },
     {
       "de": "Architekturstile",
-      "en": "Architectural styles"
+      "en": "Architectural styles",
+      "es": "Estilos arquitectónicos"
     },
     {
       "de": "Computerspiele",
-      "en": "Video games"
+      "en": "Video games",
+      "es": "Videojuegos"
     },
     {
       "de": "Brettspiele",
-      "en": "Board games"
+      "en": "Board games",
+      "es": "Juegos de mesa"
     },
     {
       "de": "Sportgeräte",
-      "en": "Sports equipment"
+      "en": "Sports equipment",
+      "es": "Material deportivo"
     },
     {
       "de": "Küchengeräte",
-      "en": "Kitchen appliances"
+      "en": "Kitchen appliances",
+      "es": "Electrodomésticos de cocina"
     },
     {
       "de": "Naturphänomene",
-      "en": "Natural phenomena"
+      "en": "Natural phenomena",
+      "es": "Fenómenos naturales"
     },
     {
       "de": "Chemische Elemente",
-      "en": "Chemical elements"
+      "en": "Chemical elements",
+      "es": "Elementos químicos"
     },
     {
       "de": "Planeten",
-      "en": "Planets"
+      "en": "Planets",
+      "es": "Planetas"
     },
     {
       "de": "Feiertage",
-      "en": "Holidays"
+      "en": "Holidays",
+      "es": "Días festivos"
     },
     {
       "de": "Berühmte Gebäude",
-      "en": "Famous buildings"
+      "en": "Famous buildings",
+      "es": "Edificios famosos"
     },
     {
       "de": "Musikbands",
-      "en": "Bands"
+      "en": "Bands",
+      "es": "Bandas de música"
     },
     {
       "de": "Politische Systeme",
-      "en": "Political systems"
+      "en": "Political systems",
+      "es": "Sistemas políticos"
     },
     {
       "de": "Währungen",
-      "en": "Currencies"
+      "en": "Currencies",
+      "es": "Monedas"
     },
     {
       "de": "Wasser",
-      "en": "Water"
+      "en": "Water",
+      "es": "Agua"
     },
     {
       "de": "Comics",
-      "en": "Comics"
+      "en": "Comics",
+      "es": "Cómics"
     },
     {
       "de": "Dinosaurier",
-      "en": "Dinosaurs"
+      "en": "Dinosaurs",
+      "es": "Dinosaurios"
     },
     {
       "de": "Universitäten",
-      "en": "Universities"
+      "en": "Universities",
+      "es": "Universidades"
     },
     {
       "de": "Handwerksberufe",
-      "en": "Trades"
+      "en": "Trades",
+      "es": "Oficios manuales"
     },
     {
       "de": "Versicherungen",
-      "en": "Insurance"
+      "en": "Insurance",
+      "es": "Seguros"
     },
     {
       "de": "Baumaterialien",
-      "en": "Building materials"
+      "en": "Building materials",
+      "es": "Materiales de construcción"
     },
     {
       "de": "Kosmetikprodukte",
-      "en": "Cosmetics"
+      "en": "Cosmetics",
+      "es": "Productos cosméticos"
     },
     {
       "de": "Haustiere",
-      "en": "Pets"
+      "en": "Pets",
+      "es": "Mascotas"
     },
     {
       "de": "Kunstrichtungen",
-      "en": "Art movements"
+      "en": "Art movements",
+      "es": "Movimientos artísticos"
     },
     {
       "de": "Museen",
-      "en": "Museums"
+      "en": "Museums",
+      "es": "Museos"
     },
     {
       "de": "Rituale",
-      "en": "Rituals"
+      "en": "Rituals",
+      "es": "Rituales"
     },
     {
       "de": "Traditionen",
-      "en": "Traditions"
+      "en": "Traditions",
+      "es": "Tradiciones"
     },
     {
       "de": "Redewendungen",
-      "en": "Idioms"
+      "en": "Idioms",
+      "es": "Refranes y expresiones"
     },
     {
       "de": "Zitate",
-      "en": "Quotes"
+      "en": "Quotes",
+      "es": "Citas"
     },
     {
       "de": "Gedichte",
-      "en": "Poems"
+      "en": "Poems",
+      "es": "Poemas"
     },
     {
       "de": "Theaterstücke",
-      "en": "Plays"
+      "en": "Plays",
+      "es": "Obras de teatro"
     },
     {
       "de": "Opern",
-      "en": "Operas"
+      "en": "Operas",
+      "es": "Óperas"
     },
     {
       "de": "Märchen",
-      "en": "Fairy tales"
+      "en": "Fairy tales",
+      "es": "Cuentos de hadas"
     },
     {
       "de": "Sagen",
-      "en": "Sagas"
+      "en": "Sagas",
+      "es": "Sagas"
     },
     {
       "de": "Legenden",
-      "en": "Legends"
+      "en": "Legends",
+      "es": "Leyendas"
     },
     {
       "de": "Verschwörungstheorien",
-      "en": "Conspiracy theories"
+      "en": "Conspiracy theories",
+      "es": "Teorías de la conspiración"
     },
     {
       "de": "Religionen",
-      "en": "Religions"
+      "en": "Religions",
+      "es": "Religiones"
     },
     {
       "de": "Götter",
-      "en": "Gods"
+      "en": "Gods",
+      "es": "Dioses"
     },
     {
       "de": "Tempel",
-      "en": "Temples"
+      "en": "Temples",
+      "es": "Templos"
     },
     {
       "de": "Klöster",
-      "en": "Monasteries"
+      "en": "Monasteries",
+      "es": "Monasterios"
     },
     {
       "de": "Kirchen",
-      "en": "Churches"
+      "en": "Churches",
+      "es": "Iglesias"
     },
     {
       "de": "Moscheen",
-      "en": "Mosques"
+      "en": "Mosques",
+      "es": "Mezquitas"
     },
     {
       "de": "Feste",
-      "en": "Festivals"
+      "en": "Festivals",
+      "es": "Fiestas"
     },
     {
       "de": "Bräuche",
-      "en": "Customs"
+      "en": "Customs",
+      "es": "Costumbres"
     },
     {
       "de": "Parteien",
-      "en": "Political parties"
+      "en": "Political parties",
+      "es": "Partidos políticos"
     },
     {
       "de": "Orden",
-      "en": "Orders"
+      "en": "Orders",
+      "es": "Órdenes"
     },
     {
       "de": "Auszeichnungen",
-      "en": "Awards"
+      "en": "Awards",
+      "es": "Premios y distinciones"
     },
     {
       "de": "Preise",
-      "en": "Prizes"
+      "en": "Prizes",
+      "es": "Premios"
     },
     {
       "de": "Trophäen",
-      "en": "Trophies"
+      "en": "Trophies",
+      "es": "Trofeos"
     },
     {
       "de": "Medaillen",
-      "en": "Medals"
+      "en": "Medals",
+      "es": "Medallas"
     },
     {
       "de": "Wappen",
-      "en": "Coats of arms"
+      "en": "Coats of arms",
+      "es": "Escudos de armas"
     },
     {
       "de": "Flaggen",
-      "en": "Flags"
+      "en": "Flags",
+      "es": "Banderas"
     },
     {
       "de": "Hymnen",
-      "en": "Anthems"
+      "en": "Anthems",
+      "es": "Himnos"
     },
     {
       "de": "Uniformen",
-      "en": "Uniforms"
+      "en": "Uniforms",
+      "es": "Uniformes"
     },
     {
       "de": "Rüstungen",
-      "en": "Armor"
+      "en": "Armor",
+      "es": "Armaduras"
     },
     {
       "de": "Waffen",
-      "en": "Weapons"
+      "en": "Weapons",
+      "es": "Armas"
     },
     {
       "de": "Kampfkünste",
-      "en": "Martial arts"
+      "en": "Martial arts",
+      "es": "Artes marciales"
     },
     {
       "de": "Heilpflanzen",
-      "en": "Medicinal plants"
+      "en": "Medicinal plants",
+      "es": "Plantas medicinales"
     },
     {
       "de": "Heilmethoden",
-      "en": "Healing methods"
+      "en": "Healing methods",
+      "es": "Métodos de curación"
     },
     {
       "de": "Medizin",
-      "en": "Medicine"
+      "en": "Medicine",
+      "es": "Medicina"
     },
     {
       "de": "Laborgeräte",
-      "en": "Lab equipment"
+      "en": "Lab equipment",
+      "es": "Equipos de laboratorio"
     },
     {
       "de": "Messgeräte",
-      "en": "Measuring instruments"
+      "en": "Measuring instruments",
+      "es": "Instrumentos de medición"
     },
     {
       "de": "Energiequellen",
-      "en": "Energy sources"
+      "en": "Energy sources",
+      "es": "Fuentes de energía"
     },
     {
       "de": "Transportmittel",
-      "en": "Means of transport"
+      "en": "Means of transport",
+      "es": "Medios de transporte"
     },
     {
       "de": "Streaming Dienste",
-      "en": "Streaming services"
+      "en": "Streaming services",
+      "es": "Servicios de streaming"
     },
     {
       "de": "Dialekte",
-      "en": "Dialects"
+      "en": "Dialects",
+      "es": "Dialectos"
     },
     {
       "de": "Schriftsysteme",
-      "en": "Writing systems"
+      "en": "Writing systems",
+      "es": "Sistemas de escritura"
     },
     {
       "de": "Kommunikationsmittel",
-      "en": "Means of communication"
+      "en": "Means of communication",
+      "es": "Medios de comunicación"
     },
     {
       "de": "Navigationsinstrumente",
-      "en": "Navigation instruments"
+      "en": "Navigation instruments",
+      "es": "Instrumentos de navegación"
     },
     {
       "de": "Anlageformen",
-      "en": "Types of investment"
+      "en": "Types of investment",
+      "es": "Tipos de inversión"
     },
     {
       "de": "Kryptowährungen",
-      "en": "Cryptocurrencies"
+      "en": "Cryptocurrencies",
+      "es": "Criptomonedas"
     },
     {
       "de": "Programmiersprachen",
-      "en": "Programming languages"
+      "en": "Programming languages",
+      "es": "Lenguajes de programación"
     },
     {
       "de": "Algorithmen",
-      "en": "Algorithms"
+      "en": "Algorithms",
+      "es": "Algoritmos"
     },
     {
       "de": "Datenstrukturen",
-      "en": "Data structures"
+      "en": "Data structures",
+      "es": "Estructuras de datos"
     },
     {
       "de": "Protokolle",
-      "en": "Protocols"
+      "en": "Protocols",
+      "es": "Protocolos"
     },
     {
       "de": "Speichermedien",
-      "en": "Storage media"
+      "en": "Storage media",
+      "es": "Medios de almacenamiento"
     },
     {
       "de": "Betriebssysteme",
-      "en": "Operating systems"
+      "en": "Operating systems",
+      "es": "Sistemas operativos"
     },
     {
       "de": "Satelliten",
-      "en": "Satellites"
+      "en": "Satellites",
+      "es": "Satélites"
     },
     {
       "de": "Raumstationen",
-      "en": "Space stations"
+      "en": "Space stations",
+      "es": "Estaciones espaciales"
     },
     {
       "de": "Teleskope",
-      "en": "Telescopes"
+      "en": "Telescopes",
+      "es": "Telescopios"
     },
     {
       "de": "Mikroskope",
-      "en": "Microscopes"
+      "en": "Microscopes",
+      "es": "Microscopios"
     },
     {
       "de": "Vitamine",
-      "en": "Vitamins"
+      "en": "Vitamins",
+      "es": "Vitaminas"
     },
     {
       "de": "Edelsteine",
-      "en": "Gemstones"
+      "en": "Gemstones",
+      "es": "Piedras preciosas"
     },
     {
       "de": "Metalle",
-      "en": "Metals"
+      "en": "Metals",
+      "es": "Metales"
     },
     {
       "de": "Größeneinheiten",
-      "en": "Units of measurement"
+      "en": "Units of measurement",
+      "es": "Unidades de medida"
     },
     {
       "de": "Kulturen",
-      "en": "Cultures"
+      "en": "Cultures",
+      "es": "Culturas"
     },
     {
       "de": "Völker",
-      "en": "Peoples"
+      "en": "Peoples",
+      "es": "Pueblos"
     },
     {
       "de": "Stämme",
-      "en": "Tribes"
+      "en": "Tribes",
+      "es": "Tribus"
     },
     {
       "de": "Clans",
-      "en": "Clans"
+      "en": "Clans",
+      "es": "Clanes"
     },
     {
       "de": "Ausbildungen",
-      "en": "Apprenticeships"
+      "en": "Apprenticeships",
+      "es": "Formaciones profesionales"
     },
     {
       "de": "Studiengänge",
-      "en": "Degree programs"
+      "en": "Degree programs",
+      "es": "Carreras universitarias"
     },
     {
       "de": "Theorien",
-      "en": "Theories"
+      "en": "Theories",
+      "es": "Teorías"
     },
     {
       "de": "Gesetze",
-      "en": "Laws"
+      "en": "Laws",
+      "es": "Leyes"
     },
     {
       "de": "Modetrends",
-      "en": "Fashion trends"
+      "en": "Fashion trends",
+      "es": "Tendencias de moda"
     },
     {
       "de": "Materialien",
-      "en": "Materials"
+      "en": "Materials",
+      "es": "Materiales"
     },
     {
       "de": "Rohstoffe",
-      "en": "Raw materials"
+      "en": "Raw materials",
+      "es": "Materias primas"
     },
     {
       "de": "Luxusartikel",
-      "en": "Luxury goods"
+      "en": "Luxury goods",
+      "es": "Artículos de lujo"
     },
     {
       "de": "Sammlerstücke",
-      "en": "Collectibles"
+      "en": "Collectibles",
+      "es": "Objetos de colección"
     },
     {
       "de": "Gesteinsarten",
-      "en": "Rock types"
+      "en": "Rock types",
+      "es": "Tipos de roca"
     },
     {
       "de": "Vulkane",
-      "en": "Volcanoes"
+      "en": "Volcanoes",
+      "es": "Volcanes"
     },
     {
       "de": "Gletscher",
-      "en": "Glaciers"
+      "en": "Glaciers",
+      "es": "Glaciares"
     },
     {
       "de": "Wüsten",
-      "en": "Deserts"
+      "en": "Deserts",
+      "es": "Desiertos"
     },
     {
       "de": "Oasen",
-      "en": "Oases"
+      "en": "Oases",
+      "es": "Oasis"
     },
     {
       "de": "Inseln",
-      "en": "Islands"
+      "en": "Islands",
+      "es": "Islas"
     }
   ]
 }

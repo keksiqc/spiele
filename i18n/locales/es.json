@@ -1,0 +1,87 @@
+{
+  "site": {
+    "name": "spiele.keksi.dev",
+    "home": "Volver al inicio",
+    "donate": "Donar",
+    "language": "Idioma"
+  },
+  "home": {
+    "title": "spiele.keksi.dev – pequeños juegos para dos",
+    "description": "Juega en pareja desde el navegador – por ahora con el juego de asociaciones para dos personas.",
+    "headline": "Pequeños juegos para dos, directamente en el navegador.",
+    "intro": "Abre una sala, comparte el código y empieza a jugar. Sin descargas ni registro.",
+    "players": "{count} jugadores"
+  },
+  "notFound": {
+    "title": "Página no encontrada – spiele.keksi.dev",
+    "label": "Error 404",
+    "headline": "Esta página no existe.",
+    "text": "Puede que el enlace esté obsoleto. Encontrarás todos los juegos en la página de inicio."
+  },
+  "game": {
+    "name": "Juego de asociaciones",
+    "title": "Juego de asociaciones – spiele.keksi.dev",
+    "description": "El juego de asociaciones para dos personas en el navegador.",
+    "summary": "Una categoría, dos respuestas. Escribid en secreto, revelad a la vez y construid una racha.",
+    "lobby": {
+      "headline": "Una categoría. Dos mentes.",
+      "intro": "Escribid en secreto, revelad a la vez y descubrid si pensáis igual.",
+      "codeLabel": "Código de la sala",
+      "codePlaceholder": "De 4 a 12 caracteres",
+      "join": "Unirse a la sala",
+      "create": "Abrir una sala nueva",
+      "privacy": "Cualquiera con el código puede entrar en la sala. Compártelo solo con tu pareja de juego."
+    },
+    "room": "Sala",
+    "copyCode": "Copiar código de la sala",
+    "leave": "Salir de la sala",
+    "connection": {
+      "connected": "Conectado",
+      "connecting": "Conectando",
+      "offline": "Sin conexión"
+    },
+    "prompt": "Nombra algo de la categoría",
+    "loadingCategory": "Cargando categoría …",
+    "streak": "Racha: {count} de 5",
+    "you": "Tú",
+    "partner": "Pareja",
+    "answerPlaceholder": "Tu respuesta",
+    "noAnswer": "Sin respuesta",
+    "partnerReady": "Listo para revelar",
+    "partnerWriting": "Aún escribiendo",
+    "reveal": "Revelar",
+    "waitingForPartner": "Esperando a tu pareja",
+    "correct": "Correcto",
+    "wrong": "Incorrecto",
+    "skip": "Saltar sin puntuar",
+    "status": {
+      "revealed": "Decidid juntos si las respuestas coinciden.",
+      "sent": "Tu respuesta está guardada. En cuanto tu pareja revele, ambos veréis las respuestas.",
+      "partnerReady": "Tu pareja está lista. Revela en cuanto termines.",
+      "secret": "Ambos escribís en secreto. Las respuestas se revelan solo cuando los dos estéis listos."
+    },
+    "toast": {
+      "connected": "Conectado – ¡a divertirse!",
+      "disconnected": "Se perdió la conexión.",
+      "correct": "¡Respuesta correcta!",
+      "wrong": "¡Respuesta incorrecta!",
+      "revealed": "Respuestas reveladas.",
+      "notReady": "Espera, la conexión aún no está lista.",
+      "copied": "Código de la sala copiado.",
+      "copyFailed": "No se pudo copiar. Comparte el código de la sala manualmente.",
+      "invalidCode": "El código de la sala debe tener de 4 a 12 letras o dígitos.",
+      "invalidUrlCode": "El código de la sala en la URL no es válido."
+    }
+  },
+  "errors": {
+    "unreadableResponse": "No se pudo leer la respuesta del servidor.",
+    "invalidResponse": "La respuesta del servidor no era válida.",
+    "connectionFailed": "No se pudo establecer la conexión con el juego.",
+    "server": {
+      "roomFull": "Esta sala ya está llena.",
+      "messageTooLarge": "El mensaje es demasiado grande.",
+      "invalidJson": "El mensaje no era un JSON válido.",
+      "unknownCommand": "Comando de juego desconocido."
+    }
+  }
+}

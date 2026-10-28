@@ -39,13 +39,16 @@ describe('game protocol', () => {
 describe('category localization', () => {
   it('translates known keys and falls back to the key otherwise', () => {
     expect(localizeCategory('Tiere', 'en')).toBe('Animals')
+    expect(localizeCategory('Tiere', 'es')).toBe('Animales')
     expect(localizeCategory('Tiere', 'de')).toBe('Tiere')
     expect(localizeCategory('Unbekannt', 'en')).toBe('Unbekannt')
   })
 
-  it('has an English name for every category', () => {
-    for (const entry of categoryEntries)
+  it('has an English and Spanish name for every category', () => {
+    for (const entry of categoryEntries) {
       expect(entry.en.trim().length, entry.de).toBeGreaterThan(0)
+      expect(entry.es.trim().length, entry.de).toBeGreaterThan(0)
+    }
     expect(new Set(categoryKeys).size).toBe(categoryKeys.length)
   })
 })
