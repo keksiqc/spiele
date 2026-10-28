@@ -22,11 +22,15 @@ function randomIndex(length: number): number {
 export function nextCategory(usedCategories: readonly string[]): { category: string, usedCategories: string[] } {
   const used = new Set(usedCategories.filter(category => categories.includes(category)))
   const available = categories.filter(category => !used.has(category))
-  const pool = available.length > 0 ? available : [...categories]
+  const pool = available.length > 0
+    ? available
+    : [...categories]
   const category = pool[randomIndex(pool.length)] ?? categories[0] ?? 'Tiere'
 
   return {
     category,
-    usedCategories: available.length > 0 ? [...used, category] : [category],
+    usedCategories: available.length > 0
+      ? [...used, category]
+      : [category],
   }
 }

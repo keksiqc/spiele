@@ -31,7 +31,9 @@ const {
 } = useGameRoom({
   onConnected: () => notify(t('game.toast.connected'), 'success'),
   onDisconnected: () => notify(t('game.toast.disconnected'), 'error'),
-  onError: key => notify(te(key) ? t(key) : key, 'error'),
+  onError: key => notify(te(key)
+    ? t(key)
+    : key, 'error'),
   onMessage: (message) => {
     if (message.type === 'streak')
       notify(t('game.toast.correct'), 'success')
@@ -100,8 +102,11 @@ function joinRoom(value: unknown = roomInput.value) {
   }
 
   roomInput.value = normalized
-  if (join(normalized))
-    void router.replace({ query: { room: normalized } })
+  if (join(normalized)) {
+    void router.replace({
+      query: { room: normalized },
+    })
+  }
 }
 
 function createRoom() {

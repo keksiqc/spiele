@@ -165,7 +165,9 @@ export function useGameRoom(callbacks: GameRoomCallbacks = {}) {
     roomId.value = normalizedRoomId
     joined.value = true
 
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+    const protocol = window.location.protocol === 'https:'
+      ? 'wss:'
+      : 'ws:'
     socketUrl.value = `${protocol}//${window.location.host}/ws?room=${encodeURIComponent(normalizedRoomId)}`
     openSocket()
 

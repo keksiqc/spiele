@@ -44,7 +44,9 @@ function onTriggerKeydown(event: KeyboardEvent) {
   if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
     event.preventDefault()
     open.value = true
-    void focusOption(event.key === 'ArrowDown' ? 0 : locales.value.length - 1)
+    void focusOption(event.key === 'ArrowDown'
+      ? 0
+      : locales.value.length - 1)
   }
 }
 

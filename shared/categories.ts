@@ -27,5 +27,7 @@ export function localizeCategory(key: string, locale: string): string {
   const entry = entriesByKey.get(key)
   if (!entry)
     return key
-  return locale === 'en' ? entry.en : entry.de
+  return locale === 'en'
+    ? entry.en
+    : entry.de
 }

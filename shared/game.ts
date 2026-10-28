@@ -30,7 +30,9 @@ export function normalizeRoomId(value: unknown): string | null {
   const normalized = value.trim().toUpperCase()
   if (normalized.length < MIN_ROOM_ID_LENGTH || normalized.length > MAX_ROOM_ID_LENGTH)
     return null
-  return ROOM_ID_PATTERN.test(normalized) ? normalized : null
+  return ROOM_ID_PATTERN.test(normalized)
+    ? normalized
+    : null
 }
 
 export function parseClientMessage(value: unknown): ClientMessage | null {
@@ -46,11 +48,17 @@ export function parseClientMessage(value: unknown): ClientMessage | null {
       return { type: 'resetStreak' }
     case 'playerInput':
       return typeof value.value === 'string'
-        ? { type: 'playerInput', value: value.value.slice(0, MAX_INPUT_LENGTH) }
+        ? {
+            type: 'playerInput',
+            value: value.value.slice(0, MAX_INPUT_LENGTH),
+          }
         : null
     case 'streak':
       return typeof value.value === 'number' && Number.isFinite(value.value)
-        ? { type: 'streak', value: Math.trunc(value.value) }
+        ? {
+            type: 'streak',
+            value: Math.trunc(value.value),
+          }
         : null
     default:
       return null
@@ -64,22 +72,32 @@ export function parseServerMessage(value: unknown): ServerMessage | null {
   switch (value.type) {
     case 'playerInput':
       return typeof value.value === 'string'
-        ? { type: 'playerInput', value: value.value.slice(0, MAX_INPUT_LENGTH) }
+        ? {
+            type: 'playerInput',
+            value: value.value.slice(0, MAX_INPUT_LENGTH),
+          }
         : null
     case 'peerRevealed':
       return { type: 'peerRevealed' }
     case 'streak':
       return typeof value.value === 'number' && Number.isFinite(value.value)
-        ? { type: 'streak', value: Math.min(5, Math.max(0, Math.trunc(value.value))) }
+        ? {
+            type: 'streak',
+            value: Math.min(5, Math.max(0, Math.trunc(value.value))),
+          }
         : null
     case 'resetStreak':
       return { type: 'resetStreak' }
     case 'newCategory':
-      return typeof value.value === 'string' ? { type: 'newCategory', value: value.value } : null
+      return typeof value.value === 'string'
+        ? { type: 'newCategory', value: value.value }
+        : null
     case 'allRevealed':
       return { type: 'allRevealed' }
     case 'error':
-      return typeof value.value === 'string' ? { type: 'error', value: value.value } : null
+      return typeof value.value === 'string'
+        ? { type: 'error', value: value.value }
+        : null
     default:
       return null
   }

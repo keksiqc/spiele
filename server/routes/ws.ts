@@ -46,7 +46,10 @@ function attachmentValue(peer: RoomPeer): Record<string, unknown> {
 function setRevealed(peer: RoomPeer, revealed: boolean) {
   const socket = socketAttachment(peer)
   if (socket.serializeAttachment) {
-    socket.serializeAttachment({ ...attachmentValue(peer), revealed })
+    socket.serializeAttachment({
+      ...attachmentValue(peer),
+      revealed,
+    })
     return
   }
 
@@ -55,7 +58,9 @@ function setRevealed(peer: RoomPeer, revealed: boolean) {
 
 function isRevealed(peer: RoomPeer): boolean {
   const value = attachmentValue(peer).revealed
-  return typeof value === 'boolean' ? value : developmentReveals.get(peer.id) === true
+  return typeof value === 'boolean'
+    ? value
+    : developmentReveals.get(peer.id) === true
 }
 
 /** Sends an error key; clients translate it into their own language. */
@@ -179,7 +184,10 @@ export default defineWebSocketHandler({
       case 'streak':
         state.lastActivity = Date.now()
         store.write(roomId, state)
-        sendToRoom(peer, roomId, { type: 'streak', value: Math.min(5, Math.max(0, messageData.value)) }, peer)
+        sendToRoom(peer, roomId, {
+          type: 'streak',
+          value: Math.min(5, Math.max(0, messageData.value)),
+        }, peer)
         return
       case 'resetStreak':
         state.lastActivity = Date.now()

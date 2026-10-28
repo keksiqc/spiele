@@ -23,7 +23,11 @@ function activeRoomIds(durable: unknown): string[] {
       return []
 
     const url = (attachment as SocketAttachment).u
-    return typeof url === 'string' ? [roomIdFromUrl(url)].filter((roomId): roomId is string => roomId !== null) : []
+    return typeof url === 'string'
+      ? [
+          roomIdFromUrl(url),
+        ].filter((roomId): roomId is string => roomId !== null)
+      : []
   })
 }
 

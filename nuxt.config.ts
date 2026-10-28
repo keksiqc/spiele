@@ -2,7 +2,13 @@ import tailwindcss from '@tailwindcss/vite'
 
 /** https://nuxt.com/docs/api/configuration/nuxt-config */
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxtjs/i18n', 'vue-sonner/nuxt'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/fonts',
+    '@nuxt/icon',
+    '@nuxtjs/i18n',
+    'vue-sonner/nuxt',
+  ],
   devtools: { enabled: true },
 
   css: ['~/assets/css/main.css'],
@@ -24,7 +30,9 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+    ],
   },
 
   typescript: {
@@ -55,8 +63,18 @@ export default defineNuxtConfig({
     defaultLocale: 'de',
     strategy: 'no_prefix',
     locales: [
-      { code: 'de', language: 'de-DE', name: 'Deutsch', file: 'de.json' },
-      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      {
+        code: 'de',
+        language: 'de-DE',
+        name: 'Deutsch',
+        file: 'de.json',
+      },
+      {
+        code: 'en',
+        language: 'en-US',
+        name: 'English',
+        file: 'en.json',
+      },
     ],
     detectBrowserLanguage: {
       useCookie: true,
