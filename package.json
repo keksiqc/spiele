@@ -18,7 +18,7 @@
     "i18n:check": "x18n check",
     "test": "vitest run --exclude '**/*.integration.test.ts'",
     "test:integration": "nuxt build && vitest run test/rooms.integration.test.ts",
-    "prepare": "nuxt prepare && lefthook install && skills experimental_sync -a universal -y && wrangler types"
+    "prepare": "nuxt prepare && lefthook install && skills experimental_sync -a universal -y --exclude @x18n/cli && wrangler types"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^10.0.0",
