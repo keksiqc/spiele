@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "spiele",
+  "main": "./.output/server/index.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./.output/public/"
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "GAME_ROOMS", "class_name": "GameRoom" }
+    ]
+  },
+  "migrations": [
+    { "tag": "game-rooms-v1", "new_sqlite_classes": ["GameRoom"] }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

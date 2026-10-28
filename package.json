@@ -7,16 +7,18 @@
   "description": "A two-player association game built with Nuxt and Nitro WebSockets.",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt build && wrangler dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "start": "node .output/server/index.mjs",
+    "preview": "wrangler dev",
+    "deploy": "nuxt build && wrangler deploy",
+    "cf:types": "wrangler types",
     "typecheck": "nuxt typecheck",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "i18n:check": "x18n check",
-    "test": "vitest run",
-    "prepare": "nuxt prepare && lefthook install && skills experimental_sync -a universal -y"
+    "test": "vitest run --exclude '**/*.integration.test.ts'",
+    "test:integration": "nuxt build && vitest run test/rooms.integration.test.ts",
+    "prepare": "nuxt prepare && lefthook install && skills experimental_sync -a universal -y && wrangler types"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^10.0.0",
@@ -41,6 +43,7 @@
     "typescript": "6.0.3",
     "vitest": "^5.0.5",
     "vue-sonner": "^2.0.9",
-    "vue-tsc": "^3.3.13"
+    "vue-tsc": "^3.3.13",
+    "wrangler": "^4.154.0"
   }
 }

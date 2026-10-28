@@ -42,3 +42,6 @@ jobs:
 
       - name: Run tests
         run: bun run test
+
+      - name: Test Cloudflare rooms
+        run: bun run test:integration

@@ -1,61 +1,69 @@
 # spiele.keksi.dev
 
-The two-player association game uses Nuxt 4, Tailwind CSS, and Nitro WebSockets. Run the application as one Node.js or Bun server.
+A two-player association game built with Nuxt 4 and Cloudflare Durable Objects.
 
-The `/ws` route uses Nitro's `defineWebSocketHandler` and CrossWS room topics. A plain TypeScript room manager keeps category history, membership, and reveal status in memory. The server discards a room when its last player leaves. Restarting the server ends all active games.
+Each room code selects one `GameRoom` Durable Object. The object owns its sockets and stores game state in SQLite-backed storage. CrossWS, included with Nitro, handles WebSocket subscriptions and hibernation. Hibernation lets an idle object sleep while players stay connected.
 
-## Setup
+Category history, membership, reveal status, and streak survive hibernation. Both players must reveal before the answers become visible. Joining or leaving resets the current round with the same category. The room clears its state when the last player leaves.
 
-This repository uses Bun:
+## Development
+
+Install dependencies with Bun:
 
 ```bash
 bun install
 ```
 
-## Development
-
-Start Nuxt's development server:
+Start the game in the local Cloudflare runtime:
 
 ```bash
 bun run dev
 ```
 
-To preview a production build:
+This command builds Nuxt and starts Wrangler, usually at `http://localhost:8787`. It uses local Durable Objects and storage. It does not connect to production rooms.
+
+This workflow serves a production build without hot reload. After editing the source, rebuild Nuxt in another terminal:
 
 ```bash
 bun run build
-bun run preview
 ```
 
-Open the URL that Nuxt prints, usually `http://localhost:3000`.
+Wrangler reloads the changed build. To preview an existing build, run `bun run preview`.
 
 ## Verification
+
+Run the source checks and unit tests:
 
 ```bash
 bun run lint
 bun run typecheck
 bun run test
-bun run build
 ```
 
-## Deploy
+Run the game against the local Cloudflare runtime:
 
-Build the application and start the generated Node.js server:
+```bash
+bun run test:integration
+```
+
+This command builds Nuxt and uses the simulator included with Wrangler. Tests cover room isolation, capacity, reveal coordination, disconnects, validation, and recovery after forced hibernation.
+
+## Deployment
+
+Sign in to Cloudflare and deploy:
+
+```bash
+bunx wrangler login
+bun run deploy
+```
+
+The configuration in `wrangler.jsonc` binds `GAME_ROOMS` to `GameRoom` and creates its SQLite-backed namespace. The Worker entry routes `/ws` to the object for the normalized room code. Nitro handles the other requests, and Cloudflare serves the static assets.
+
+To validate the deployment bundle without publishing it, run:
 
 ```bash
 bun run build
-bun run start
+bunx wrangler deploy --dry-run
 ```
 
-The start command runs `node .output/server/index.mjs`. Deploy the entire `.output/` directory to a host that supports a long-running Node.js process and WebSocket connections. Set `HOST` and `PORT` to change the listening address. Configure any reverse proxy to forward WebSocket upgrades.
-
-For Bun, select Nitro's Bun preset when building, then start the generated server:
-
-```bash
-NITRO_PRESET=bun bun run build
-bun .output/server/index.mjs
-```
-
-Run one server process. Room state and topic subscriptions belong to that process. Multiple processes require shared room coordination and message delivery. A shared database alone does not provide either connection routing or broadcasts.
-
-Cloudflare Workers and short-lived serverless functions need a different room coordination backend. Selecting a deployment preset alone does not make in-memory games work across isolated or suspended instances. Static generation cannot serve the WebSocket game.
+After changing Cloudflare bindings, regenerate the types with `bun run cf:types`. The install preparation step also generates these types.

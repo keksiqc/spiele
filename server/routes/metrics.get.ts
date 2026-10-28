@@ -1,4 +1,4 @@
 export default defineEventHandler(() => ({
-  roomState: 'in-memory',
-  websocketMode: 'nitro',
+  roomState: 'durable-object',
+  websocketMode: 'crossws-cloudflare',
 }))
