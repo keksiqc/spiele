@@ -4,16 +4,14 @@
   "version": "2.0.0",
   "private": true,
   "packageManager": "bun@1.4.4",
-  "description": "A two-player association game running on Nuxt and Cloudflare Workers.",
+  "description": "A two-player association game built with Nuxt and Nitro WebSockets.",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt build && wrangler dev",
-    "preview:nuxt": "nuxt preview",
-    "deploy": "nuxt build && wrangler deploy",
+    "preview": "nuxt preview",
+    "start": "node .output/server/index.mjs",
     "typecheck": "nuxt typecheck",
-    "cf-typegen": "wrangler types",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "i18n:check": "x18n check",
@@ -43,7 +41,6 @@
     "typescript": "6.0.3",
     "vitest": "^5.0.5",
     "vue-sonner": "^2.0.9",
-    "vue-tsc": "^3.3.13",
-    "wrangler": "^4.154.0"
+    "vue-tsc": "^3.3.13"
   }
 }

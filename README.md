@@ -1,8 +1,8 @@
 # spiele.keksi.dev
 
-The association game rebuilt as a Nuxt 4 application with Tailwind CSS and Cloudflare Workers. The old Go server and standalone Vite client are no longer part of the runtime.
+The two-player association game uses Nuxt 4, Tailwind CSS, and Nitro WebSockets. Run the application as one Node.js or Bun server.
 
-The app uses Nitro's recommended `cloudflare_durable` preset. Nitro owns the generated `$DurableObject` Worker class and the CrossWS WebSocket adapter; logical rooms are isolated by room ID and stored as rows in the object's SQLite database. WebSockets use Cloudflare's Hibernation API, so idle connections do not keep a Worker invocation running.
+The `/ws` route uses Nitro's `defineWebSocketHandler` and CrossWS room topics. A plain TypeScript room manager keeps category history, membership, and reveal status in memory. The server discards a room when its last player leaves. Restarting the server ends all active games.
 
 ## Setup
 
@@ -10,26 +10,24 @@ This repository uses Bun:
 
 ```bash
 bun install
-bun run cf-typegen
 ```
 
 ## Development
 
-Use Nuxt's development server for the UI:
+Start Nuxt's development server:
 
 ```bash
 bun run dev
 ```
 
-Nuxt's development server uses [`wrangler.dev.jsonc`](./wrangler.dev.jsonc), which deliberately contains no Durable Object binding. It uses an in-memory room store for fast UI work. Use the Worker preview below when testing Nitro's generated `$DurableObject`, SQLite state, and WebSockets.
-
-To exercise the built Worker, including the `/ws` Durable Object route:
+To preview a production build:
 
 ```bash
+bun run build
 bun run preview
 ```
 
-The Worker preview is available at the URL Wrangler prints, usually `http://localhost:8787`.
+Open the URL that Nuxt prints, usually `http://localhost:3000`.
 
 ## Verification
 
@@ -42,11 +40,22 @@ bun run build
 
 ## Deploy
 
-Authenticate Wrangler once, then deploy the Nuxt output, static assets, and Durable Object binding:
+Build the application and start the generated Node.js server:
 
 ```bash
-bunx wrangler login
-bun run deploy
+bun run build
+bun run start
 ```
 
-The Durable Object SQLite export and migration settings are declared in [`wrangler.jsonc`](./wrangler.jsonc). The configuration uses Nitro's `$DurableObject` class rather than the previous custom `Room` class. If the old `Room` Worker has already been deployed, treat this as a Durable Object class/binding migration before deploying to production.
+The start command runs `node .output/server/index.mjs`. Deploy the entire `.output/` directory to a host that supports a long-running Node.js process and WebSocket connections. Set `HOST` and `PORT` to change the listening address. Configure any reverse proxy to forward WebSocket upgrades.
+
+For Bun, select Nitro's Bun preset when building, then start the generated server:
+
+```bash
+NITRO_PRESET=bun bun run build
+bun .output/server/index.mjs
+```
+
+Run one server process. Room state and topic subscriptions belong to that process. Multiple processes require shared room coordination and message delivery. A shared database alone does not provide either connection routing or broadcasts.
+
+Cloudflare Workers and short-lived serverless functions need a different room coordination backend. Selecting a deployment preset alone does not make in-memory games work across isolated or suspended instances. Static generation cannot serve the WebSocket game.

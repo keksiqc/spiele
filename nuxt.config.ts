@@ -16,16 +16,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-09-07',
 
   nitro: {
-    preset: 'cloudflare_durable',
     experimental: {
       websocket: true,
-    },
-    cloudflare: {
-      deployConfig: false,
-      dev: {
-        configPath: 'wrangler.dev.jsonc',
-      },
-      nodeCompat: true,
     },
   },
 

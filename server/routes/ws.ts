@@ -1,87 +1,24 @@
 import type { ServerMessage } from '../../shared/game'
 import { parseClientMessage } from '../../shared/game'
-import { chooseNextCategory, getRoomStore, MAX_MESSAGE_BYTES, roomIdFromUrl } from '../game/room-store'
-
-const MAX_CLIENTS = 2
+import { MAX_MESSAGE_BYTES, roomIdFromUrl, RoomManager } from '../game/room-manager'
 
 type WebSocketHooks = Parameters<typeof defineWebSocketHandler>[0]
 type RoomPeer = Parameters<NonNullable<WebSocketHooks['open']>>[0]
-type RoomMessage = Parameters<NonNullable<WebSocketHooks['message']>>[1]
 
-const developmentReveals = new Map<string, boolean>()
+const rooms = new RoomManager()
 
-interface SocketAttachment {
-  deserializeAttachment?: () => unknown
-  serializeAttachment?: (value: unknown) => void
+function roomTopic(roomId: string) {
+  return `room:${roomId}`
 }
 
-interface RoomPeerInternals {
-  _internal?: {
-    ws?: unknown
-  }
+/** CrossWS publish excludes the sender; room-wide events also need a direct send. */
+function broadcast(peer: RoomPeer, roomId: string, message: ServerMessage) {
+  peer.send(message)
+  peer.publish(roomTopic(roomId), message)
 }
 
-function peerRoomId(peer: RoomPeer): string | null {
-  return roomIdFromUrl(peer.request.url)
-}
-
-function peersInRoom(peer: RoomPeer, roomId: string): RoomPeer[] {
-  return [...peer.peers].filter(candidate => peerRoomId(candidate) === roomId)
-}
-
-function socketAttachment(peer: RoomPeer): SocketAttachment {
-  // CrossWS exposes a Proxy as `peer.websocket` in the Durable Object adapter.
-  // Cloudflare's attachment methods must be invoked on the original socket.
-  const socket = (peer as RoomPeer & RoomPeerInternals)._internal?.ws ?? peer.websocket
-  return socket as SocketAttachment
-}
-
-function attachmentValue(peer: RoomPeer): Record<string, unknown> {
-  const attachment = socketAttachment(peer).deserializeAttachment?.()
-  return attachment && typeof attachment === 'object' && !Array.isArray(attachment)
-    ? attachment as Record<string, unknown>
-    : {}
-}
-
-function setRevealed(peer: RoomPeer, revealed: boolean) {
-  const socket = socketAttachment(peer)
-  if (socket.serializeAttachment) {
-    socket.serializeAttachment({
-      ...attachmentValue(peer),
-      revealed,
-    })
-    return
-  }
-
-  developmentReveals.set(peer.id, revealed)
-}
-
-function isRevealed(peer: RoomPeer): boolean {
-  const value = attachmentValue(peer).revealed
-  return typeof value === 'boolean'
-    ? value
-    : developmentReveals.get(peer.id) === true
-}
-
-/** Sends an error key; clients translate it into their own language. */
 function sendError(peer: RoomPeer, value: string) {
   peer.send({ type: 'error', value } satisfies ServerMessage)
-}
-
-function sendToRoom(peer: RoomPeer, roomId: string, message: ServerMessage, excluded?: RoomPeer) {
-  for (const candidate of peersInRoom(peer, roomId)) {
-    if (candidate !== excluded)
-      candidate.send(message)
-  }
-}
-
-function touchRoom(roomId: string, peer: RoomPeer) {
-  const store = getRoomStore()
-  const state = store.read(roomId)
-  state.revealedCount = peersInRoom(peer, roomId).filter(isRevealed).length
-  state.lastActivity = Date.now()
-  store.write(roomId, state)
-  return { store, state }
 }
 
 export default defineWebSocketHandler({
@@ -95,29 +32,28 @@ export default defineWebSocketHandler({
   },
 
   open(peer) {
-    const roomId = peerRoomId(peer)
+    const roomId = roomIdFromUrl(peer.request.url)
     if (!roomId)
       return
 
-    const roomPeers = peersInRoom(peer, roomId)
-    if (roomPeers.length > MAX_CLIENTS) {
-      peer.context.rejected = true
+    const room = rooms.join(roomId, peer.id)
+    if (!room) {
       sendError(peer, 'roomFull')
       peer.close(1008, 'Room is full')
       return
     }
 
-    const store = getRoomStore()
-    const state = chooseNextCategory(store.read(roomId))
-    state.lastActivity = Date.now()
-    store.write(roomId, state)
-    setRevealed(peer, false)
-    peer.send({ type: 'newCategory', value: state.currentCategory } satisfies ServerMessage)
+    peer.subscribe(roomTopic(roomId))
+    peer.send({ type: 'newCategory', value: room.currentCategory } satisfies ServerMessage)
   },
 
-  message(peer, message: RoomMessage) {
-    const roomId = peerRoomId(peer)
+  message(peer, message) {
+    const roomId = roomIdFromUrl(peer.request.url)
     if (!roomId)
+      return
+
+    const room = rooms.get(roomId, peer.id)
+    if (!room)
       return
 
     if (message.uint8Array().byteLength > MAX_MESSAGE_BYTES) {
@@ -140,73 +76,46 @@ export default defineWebSocketHandler({
       return
     }
 
-    const store = getRoomStore()
-    const state = store.read(roomId)
-
+    const topic = roomTopic(roomId)
     switch (messageData.type) {
-      case 'newCategory': {
-        const next = chooseNextCategory({ ...state, currentCategory: '' })
-        state.currentCategory = next.currentCategory
-        state.usedCategories = next.usedCategories
-        state.revealedCount = 0
-        state.lastActivity = Date.now()
-        for (const candidate of peersInRoom(peer, roomId))
-          setRevealed(candidate, false)
-        store.write(roomId, state)
-        sendToRoom(peer, roomId, { type: 'newCategory', value: state.currentCategory })
+      case 'newCategory':
+        rooms.nextCategory(room)
+        broadcast(peer, roomId, { type: 'newCategory', value: room.currentCategory })
         return
-      }
       case 'playerInput':
-        state.lastActivity = Date.now()
-        store.write(roomId, state)
-        sendToRoom(peer, roomId, { type: 'playerInput', value: messageData.value }, peer)
+        peer.publish(topic, { type: 'playerInput', value: messageData.value } satisfies ServerMessage)
         return
       case 'reveal': {
-        if (isRevealed(peer))
+        if (room.revealedPlayers.has(peer.id))
           return
 
-        setRevealed(peer, true)
-        const roomPeers = peersInRoom(peer, roomId)
-        state.revealedCount = roomPeers.filter(isRevealed).length
-        state.lastActivity = Date.now()
-        store.write(roomId, state)
-        sendToRoom(peer, roomId, { type: 'peerRevealed' }, peer)
+        room.revealedPlayers.add(peer.id)
+        peer.publish(topic, { type: 'peerRevealed' } satisfies ServerMessage)
 
-        if (state.revealedCount >= roomPeers.length && roomPeers.length > 0) {
-          for (const candidate of roomPeers)
-            setRevealed(candidate, false)
-          state.revealedCount = 0
-          store.write(roomId, state)
-          sendToRoom(peer, roomId, { type: 'allRevealed' })
+        if (room.revealedPlayers.size === room.players.size) {
+          room.revealedPlayers.clear()
+          broadcast(peer, roomId, { type: 'allRevealed' })
         }
         return
       }
       case 'streak':
-        state.lastActivity = Date.now()
-        store.write(roomId, state)
-        sendToRoom(peer, roomId, {
+        peer.publish(topic, {
           type: 'streak',
           value: Math.min(5, Math.max(0, messageData.value)),
-        }, peer)
+        } satisfies ServerMessage)
         return
       case 'resetStreak':
-        state.lastActivity = Date.now()
-        store.write(roomId, state)
-        sendToRoom(peer, roomId, { type: 'resetStreak' }, peer)
+        peer.publish(topic, { type: 'resetStreak' } satisfies ServerMessage)
     }
   },
 
-  async close(peer) {
-    developmentReveals.delete(peer.id)
-    if (peer.context.rejected)
-      return
-
-    const roomId = peerRoomId(peer)
+  close(peer) {
+    const roomId = roomIdFromUrl(peer.request.url)
     if (!roomId)
       return
 
-    const { store } = touchRoom(roomId, peer)
-    await store.scheduleExpiry()
+    peer.unsubscribe(roomTopic(roomId))
+    rooms.leave(roomId, peer.id)
   },
 
   error(peer, error) {
