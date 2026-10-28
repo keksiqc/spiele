@@ -1,10 +1,11 @@
 import categoryData from '../data/categories.json'
 
-export type CategoryLocale = 'de' | 'en'
+export type CategoryLocale = 'de' | 'en' | 'es'
 
 export interface CategoryEntry {
   de: string
   en: string
+  es: string
 }
 
 interface CategoryData {
@@ -27,7 +28,9 @@ export function localizeCategory(key: string, locale: string): string {
   const entry = entriesByKey.get(key)
   if (!entry)
     return key
-  return locale === 'en'
-    ? entry.en
-    : entry.de
+  if (locale === 'en')
+    return entry.en
+  if (locale === 'es')
+    return entry.es
+  return entry.de
 }

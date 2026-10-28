@@ -75,6 +75,12 @@ export default defineNuxtConfig({
         dir: 'ltr',
         displayName: 'English',
       },
+      {
+        code: 'es',
+        iso: 'es-ES',
+        dir: 'ltr',
+        displayName: 'Español',
+      },
     ],
   },
 
