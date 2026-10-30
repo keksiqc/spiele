@@ -17,8 +17,8 @@ shellEmulator: true
 
 allowBuilds:
   esbuild: true
+  nano-hooks: true
   nuxt-i18n-micro: true
-  simple-git-hooks: true
   unrs-resolver: true
   workerd: true
 

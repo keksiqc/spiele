@@ -18,7 +18,7 @@
     "i18n:check": "x18n check",
     "test": "vitest run --exclude '**/*.integration.test.ts'",
     "test:integration": "nuxt build && vitest run test/rooms.integration.test.ts",
-    "prepare": "nuxt prepare && simple-git-hooks && skills experimental_sync -a universal -y --exclude @x18n/cli && wrangler types"
+    "prepare": "nuxt prepare && nano-hooks && skills experimental_sync -a universal -y --exclude @x18n/cli && wrangler types"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^10.0.0",
@@ -36,10 +36,9 @@
     "eslint-plugin-format": "^2.0.1",
     "eslint-plugin-slop": "^0.1.3",
     "eslint-plugin-sonarjs": "^4.2.2",
-    "nano-staged": "^1.0.2",
+    "nano-hooks": "^0.2.0",
     "nuxt": "^4.6.3",
     "nuxt-i18n-micro": "^3.30.1",
-    "simple-git-hooks": "^2.14.0",
     "skills": "^1.7.4",
     "tailwindcss": "^4.3.3",
     "typescript": "6.0.3",
@@ -48,10 +47,12 @@
     "vue-tsc": "^3.3.13",
     "wrangler": "^4.154.0"
   },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && pnpx nano-staged"
-  },
-  "nano-staged": {
-    "*.{js,ts,tsx,json,css,md,yaml,vue}": "eslint --fix --no-warn-ignored"
+  "nano-hooks": {
+    "hooks": {
+      "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && nano-hooks staged"
+    },
+    "staged": {
+      "*.{js,ts,tsx,json,css,md,yaml,vue}": "eslint --fix --no-warn-ignored"
+    }
   }
 }
